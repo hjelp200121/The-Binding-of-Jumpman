@@ -7,13 +7,13 @@ public class PlayerController : MonoBehaviour
 {
 
     public float speed;
-    Rigidbody2D rigidbody;
+    Rigidbody2D rb;
     public Text keysText;
     public static int keys = 0;
 
     // Start is called before the first frame update
     void Start(){
-        rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        rigidbody.velocity = new Vector2(horizontal * speed, vertical * speed);
+        rb.velocity = new Vector2(horizontal * speed, vertical * speed);
     }
 
     public void Ui() {
