@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 15
   height: 9
+  wallThickness: 1
   x: 0
   y: 0
   doorMask: 15
@@ -69,7 +70,7 @@ GameObject:
   - component: {fileID: 5039056160082619103}
   - component: {fileID: 5039056160082619100}
   - component: {fileID: 5039056160082619101}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Room Floor
   m_Icon: {fileID: 0}
@@ -181,7 +182,7 @@ GameObject:
   - component: {fileID: 5850062876470164612}
   - component: {fileID: 7453889712332481852}
   - component: {fileID: 5973057649750610613}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Walls
   m_TagString: Room Wall
   m_Icon: {fileID: 0}
@@ -286,7 +287,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:

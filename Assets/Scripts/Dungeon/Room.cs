@@ -9,6 +9,7 @@ public class Room : MonoBehaviour
     public static int gridWidth = 13;
 
     public float width, height;
+    public float wallThickness = 1f;
     public int x, y;
     /* Four bits representing whether or not a door is allowed in that direction. */
     public int doorMask = 0;
