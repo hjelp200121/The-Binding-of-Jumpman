@@ -1,44 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
 
     public float speed;
-
-    private Vector2 direction;
+    Rigidbody2D rb;
+    public Text keysText;
+    public static int keys = 0;
 
     // Start is called before the first frame update
     void Start(){
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update(){
-        GetInput();
         Move();
+        Ui();
     }
 
     public void Move() {
-        transform.Translate(direction * speed * Time.deltaTime);
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
+        rb.velocity = new Vector2(horizontal * speed, vertical * speed);
     }
 
-    private void GetInput() {
-        direction = Vector2.zero;
-
-        if (Input.GetKey(KeyCode.W)) {
-            direction += Vector2.up;
-        }
-        if (Input.GetKey(KeyCode.A)) {
-            direction += Vector2.left;
-        }
-        if (Input.GetKey(KeyCode.S)) {
-            direction += Vector2.down;
-        }
-        if (Input.GetKey(KeyCode.D)) {
-            direction += Vector2.right;
-        }
+    public void Ui() {
+        keysText.text = "Keys: " + keys;
     }
 }
