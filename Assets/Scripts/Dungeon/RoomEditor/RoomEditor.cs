@@ -13,7 +13,9 @@ public class RoomEditor : MonoBehaviour
     public DungeonTile[] tiles;
 
     public InputField roomNameInput;
+    public GameObject doorGraphicPrefab;
 
+    public GameObject[] doors;
     Room loadedRoom = null;
     DungeonTile activeTile;
     // Start is called before the first frame update
@@ -65,6 +67,7 @@ public class RoomEditor : MonoBehaviour
         }
 
         loadedRoom = Instantiate<Room>(room);
+        UpdateDoorGraphics();
     }
 
     public void SaveRoom()
@@ -93,31 +96,72 @@ public class RoomEditor : MonoBehaviour
             /* If no room is loaded, abort. */
             return;
         }
-        Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(inputRay, out hit))
+        int layerMask = LayerMask.GetMask("Room");
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
+                                             Vector2.zero, Mathf.Infinity, layerMask);
+        if (hit.collider != null)
         {
-            Debug.Log(hit.collider.name);
             if (hit.collider.tag == "Room Floor")
             {
                 Vector2 tileCoordinates = loadedRoom.transform.InverseTransformPoint(hit.point);
-                tileCoordinates.x = Mathf.Round(tileCoordinates.x / Room.gridWidth - Room.gridWidth);
-                tileCoordinates.y = Mathf.Round(tileCoordinates.y / Room.gridHeight - Room.gridHeight);
+                tileCoordinates.x = Mathf.Clamp(tileCoordinates.x + Room.gridWidth / 2f,
+                                                0, Room.gridWidth - 1);
+                tileCoordinates.y = Mathf.Clamp(tileCoordinates.y + Room.gridHeight / 2f,
+                                                0, Room.gridHeight - 1);
                 EditTile((int)tileCoordinates.x, (int)tileCoordinates.y);
             }
             else if (hit.collider.tag == "Room Wall")
             {
-                // Edit wall.
+                /* Only toggle the wall on the first frame the button is pushed down. */
+                if (!Input.GetMouseButtonDown(0))
+                {
+                    return;
+                }
+                Vector2 localHitPoint = loadedRoom.transform.InverseTransformPoint(hit.point);
+                /* Scale the point so the width mathces the height. */
+                localHitPoint.x *= loadedRoom.height;
+                localHitPoint.y *= loadedRoom.width;
+
+                Directions direction;
+                if (Mathf.Abs(localHitPoint.x) > Mathf.Abs(localHitPoint.y))
+                {
+                    if (localHitPoint.x > 0)
+                    {
+                        direction = Directions.EAST;
+                    }
+                    else
+                    {
+                        direction = Directions.WEST;
+                    }
+                }
+                else
+                {
+                    if (localHitPoint.y > 0)
+                    {
+                        direction = Directions.NORTH;
+                    }
+                    else
+                    {
+                        direction = Directions.SOUTH;
+                    }
+                }
+
+                EditWall(direction);
+                UpdateDoorGraphics();
+            }
+            else
+            {
+                Debug.Log("Hit a: " + hit.collider.gameObject.name);
             }
         }
     }
 
     void EditTile(int x, int y)
     {
-        if (x < 0 || y < 0 || x >= Room.gridWidth || y >= Room.gridHeight) {
+        if (x < 0 || y < 0 || x >= Room.gridWidth || y >= Room.gridHeight)
+        {
             return;
         }
-        Debug.Log("Editing cell at: (" + x + ", " + y + ")");
         DungeonTile oldTile = loadedRoom.contents.GetTile(x, y);
         if (oldTile != null)
         {
@@ -129,7 +173,65 @@ public class RoomEditor : MonoBehaviour
             newTile = Instantiate<DungeonTile>(activeTile, loadedRoom.transform);
             newTile.x = x;
             newTile.y = y;
+            Vector2 postion;
+            postion.x = x - Room.gridWidth / 2f + .5f;
+            postion.y = y - Room.gridHeight / 2f + .5f;
+            newTile.transform.position = loadedRoom.transform.TransformPoint(postion);
         }
         loadedRoom.contents.SetTile(newTile, x, y);
+    }
+
+    void EditWall(Directions direction)
+    {
+        /* Invert the door mask bit toggling whether or not a door can exist. */
+        int bit = 1 << (int)direction;
+        loadedRoom.doorMask ^= bit;
+    }
+
+    void UpdateDoorGraphics()
+    {
+        /* If no room is loaded, remove all door graphics. */
+        if (loadedRoom == null)
+        {
+            for (Directions d = Directions.NORTH;
+                 d <= Directions.WEST; d++)
+            {
+                GameObject door = doors[(int)d];
+                if (door != null)
+                {
+                    Destroy(door);
+                    doors[(int)d] = null;
+                }
+            }
+        }
+        for (Directions d = Directions.NORTH;
+             d <= Directions.WEST; d++)
+        {
+            int mask = 1 << (int)d;
+            if ((loadedRoom.doorMask & mask) != 0)
+            {
+                Destroy(doors[(int)d]);
+
+                GameObject door = Instantiate<GameObject>(doorGraphicPrefab, transform);
+                if (d == Directions.NORTH || d == Directions.SOUTH)
+                {
+                    door.transform.position = d.ToVector() * (loadedRoom.height - 1f) / 2f;
+                }
+                else
+                {
+                    door.transform.position = d.ToVector() * (loadedRoom.width -1f) / 2f;
+                }
+
+                door.transform.position = loadedRoom.transform.TransformPoint(door.transform.position);
+                door.transform.rotation = loadedRoom.transform.rotation * Quaternion.FromToRotation(Vector2.up, d.ToVector());
+
+                doors[(int)d] = door;
+            }
+            else if (doors[(int)d] != null && (loadedRoom.doorMask & mask) == 0)
+            {
+                Destroy(doors[(int)d]);
+                doors[(int)d] = null;
+            }
+        }
     }
 }

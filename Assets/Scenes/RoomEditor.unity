@@ -244,6 +244,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 2024161861180009623, guid: 97594b3ea76558da6970ce7de38f8ab5, type: 3}
   roomNameInput: {fileID: 1265387074}
+  doorGraphicPrefab: {fileID: 6017017859739203458, guid: 3a62ed7a2edd04702b724b167998af6f,
+    type: 3}
+  doors:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &70538666
 GameObject:
   m_ObjectHideFlags: 0
