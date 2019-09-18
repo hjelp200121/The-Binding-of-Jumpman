@@ -16,7 +16,7 @@ static class RoomDirectionsExtentionMethods
     }
 
     public static Directions Next(this Directions direction) {
-        if (direction == Directions.EAST) {
+        if (direction == Directions.WEST) {
             return Directions.NORTH;
         } else {
             return (Directions) (direction++);
@@ -25,7 +25,7 @@ static class RoomDirectionsExtentionMethods
 
     public static Directions Prev(this Directions direction) {
         if (direction == Directions.NORTH) {
-            return Directions.EAST;
+            return Directions.WEST;
         } else {
             return (Directions) (direction--);
         }
