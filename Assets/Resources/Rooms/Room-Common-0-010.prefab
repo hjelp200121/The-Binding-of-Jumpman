@@ -2018,7 +2018,7 @@ MonoBehaviour:
   wallThickness: 1
   x: 0
   y: 0
-  doorMask: 15
+  doorMask: 5
   types: 0
   doorwayColliders:
   - {fileID: 8907832825286409798}
