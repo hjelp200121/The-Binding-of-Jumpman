@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     //initializations for different stuff
     Rigidbody2D rb;
     Animator animator;
-    public Text keysText;
+    //public Text keysText;
     public int keys = 0;
     public Projectile projectilePrefab;
     private float lastFire;
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Ui() {
-        keysText.text = "Keys: " + keys;
+        //keysText.text = "Keys: " + keys;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
