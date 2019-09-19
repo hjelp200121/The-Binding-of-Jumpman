@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    static int gridHeight = 7;
-    static int gridWidth = 13;
+    public static int gridHeight = 7;
+    public static int gridWidth = 13;
 
     public float width, height;
     public int x, y;
@@ -20,7 +20,6 @@ public class Room : MonoBehaviour
 
     void Awake () {
         if (contents.room == null) {
-            Debug.Log("bruh");
             contents = new RoomContents(this, gridWidth, gridHeight);
         } else {
             Debug.Log(contents);
