@@ -7,6 +7,7 @@ TagManager:
   - Room Floor
   - Room Wall
   - Room
+  - Pickup
   layers:
   - Default
   - TransparentFX

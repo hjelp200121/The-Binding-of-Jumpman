@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     public Text keysText;
-    public static int keys = 0;
+    public int keys = 0;
     public Projectile projectilePrefab;
     private float lastFire;
     private bool lookShoot;
@@ -98,4 +98,12 @@ public class PlayerController : MonoBehaviour
     public void Ui() {
         keysText.text = "Keys: " + keys;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.tag == "Pickup") {
+            Pickup pickup = collision.gameObject.GetComponent<Pickup>();
+            pickup.OnPickup(this);
+        }
+    }
+    
 }
