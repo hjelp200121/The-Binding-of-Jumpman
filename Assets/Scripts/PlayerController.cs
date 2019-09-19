@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
             else if (Input.GetKey("w")) {
                 animator.SetInteger("LookDirection", 0);
             }
-            else if (Input.GetKey("s")) {
+            else {
                 animator.SetInteger("LookDirection", 2);
             }
         }
