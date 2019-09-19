@@ -42,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Room
+    uniqueID: 4139428165
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

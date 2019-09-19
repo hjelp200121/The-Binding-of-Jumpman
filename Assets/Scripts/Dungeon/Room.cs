@@ -20,11 +20,25 @@ public class Room : MonoBehaviour
 
     public RoomContents contents;
 
+    public PlayerController player;
+
 
     void Awake () {
         if (contents.room == null) {
             contents = new RoomContents(this, gridWidth, gridHeight);
         }
+    }
+
+    public void Load(PlayerController player) {
+        gameObject.SetActive(true);
+        this.player = player;
+        contents.Load();
+    }
+
+    public void UnLoad() {
+        contents.UnLoad();
+        this.player = null;
+        gameObject.SetActive(false);
     }
 }
 

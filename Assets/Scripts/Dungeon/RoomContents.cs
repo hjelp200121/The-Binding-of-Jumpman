@@ -32,4 +32,32 @@ public class RoomContents
     {
         tiles[x + y * width] = tile;
     }
+
+    public void Load()
+    {
+        foreach (DungeonTile tile in tiles)
+        {
+            if (tile != null)
+            {
+                tile.Load();
+            }
+        }
+        foreach (DungeonEntity entity in entities) {
+            entity.Load();
+        }
+    }
+
+    public void UnLoad()
+    {
+        foreach (DungeonTile tile in tiles)
+        {
+            if (tile != null)
+            {
+                tile.UnLoad();
+            }
+        }
+        foreach (DungeonEntity entity in entities) {
+            entity.UnLoad();
+        }
+    }
 }
