@@ -8,7 +8,7 @@ public class RoomEditor : MonoBehaviour
 {
     static string roomPrefabPath = "Assets/Resources/Rooms/";
     static string roomResourcePath = "Rooms/";
-    static string defaultRoomName = "Room-0-000";
+    static string defaultRoomName = "Room-Common-0-000";
 
     public DungeonTile[] tiles;
 

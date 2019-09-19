@@ -14,6 +14,8 @@ public class Room : MonoBehaviour
     /* Four bits representing whether or not a door is allowed in that direction. */
     public int doorMask = 0;
     public RoomTypes types;
+    /* The four colliders to use when no door is at the wall. */
+    public Collider2D[] doorwayColliders;
     public Door[] doors;
 
     public RoomContents contents;
