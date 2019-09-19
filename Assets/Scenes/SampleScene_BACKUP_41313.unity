@@ -522,7 +522,10 @@ GameObject:
   - component: {fileID: 1152553441}
   - component: {fileID: 1152553445}
   - component: {fileID: 1152553442}
+<<<<<<< HEAD
+=======
   - component: {fileID: 1152553446}
+>>>>>>> 300cab52e3de4685d15f3c2bfb120b9ad6919caf
   m_Layer: 0
   m_Name: Player
   m_TagString: Player

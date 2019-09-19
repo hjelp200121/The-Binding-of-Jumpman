@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update(){
         timer -= Time.deltaTime;
+        Debug.Log(timer);
         if(timer <= 0) {
             Destroy(gameObject);
         }
