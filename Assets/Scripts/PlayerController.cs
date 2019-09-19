@@ -7,10 +7,12 @@ public class PlayerController : MonoBehaviour
 {
     //initializations for different stuff
     Rigidbody2D rb;
+    Animator animator;
     public Text keysText;
     public static int keys = 0;
     public Projectile projectilePrefab;
     private float lastFire;
+    private bool lookShoot;
 
     //actual ingame stats
     //public float health;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -44,23 +47,47 @@ public class PlayerController : MonoBehaviour
         {
             vertical = 0;
         }
+        if (lookShoot == false) {
+            if (Input.GetKey("a")) {
+                animator.SetInteger("LookDirection", 3);
+            }
+            else if (Input.GetKey("d")) {
+                animator.SetInteger("LookDirection", 1);
+            }
+            else if (Input.GetKey("w")) {
+                animator.SetInteger("LookDirection", 0);
+            }
+            else if (Input.GetKey("s")) {
+                animator.SetInteger("LookDirection", 2);
+            }
+        }
         rb.velocity = new Vector2(horizontal, vertical);
     }
 
     public void Shoot() {
         float shootHorizontal = 0;
         float shootVertical = 0;
-        if (Input.GetKey("left")) {
+        if (Input.GetKey("left") && Time.time > lastFire + fireDelay) {
             shootHorizontal = -1;
-        } else if(Input.GetKey("right")) {
+            animator.SetInteger("LookDirection", 3);
+            lookShoot = true;
+        } else if(Input.GetKey("right") && Time.time > lastFire + fireDelay) {
             shootHorizontal = 1;
-        } else if(Input.GetKey("up")) {
+            animator.SetInteger("LookDirection", 1);
+            lookShoot = true;
+        } else if(Input.GetKey("up") && Time.time > lastFire + fireDelay) {
             shootVertical = 1;
-        } else if(Input.GetKey("down")) {
+            animator.SetInteger("LookDirection", 0);
+            lookShoot = true;
+        } else if(Input.GetKey("down") && Time.time > lastFire + fireDelay) {
             shootVertical = -1;
+            animator.SetInteger("LookDirection", 2);
+            lookShoot = true;
+        } else if(Time.time > lastFire + fireDelay){
+            lookShoot = false;
         }
 
-        if((shootHorizontal != 0 || shootVertical != 0) && Time.time > lastFire + fireDelay){
+        if(shootHorizontal != 0 || shootVertical != 0){
             lastFire = Time.time;
             Projectile projectile = Instantiate<Projectile>(projectilePrefab, transform.position, transform.rotation);
             projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(shootHorizontal * shotSpeed, shootVertical * shotSpeed);
