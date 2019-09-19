@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 284910987}
   - component: {fileID: 284910986}
   m_Layer: 0
-  m_Name: Projectile (1)
+  m_Name: Key 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,14 +168,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.08, y: 0.08}
-    newSize: {x: 0.08, y: 0.08}
+    oldSize: {x: 0.51724136, y: 0.51724136}
+    newSize: {x: 0.51724136, y: 0.51724136}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.08, y: 0.08}
+  m_Size: {x: 0.51724136, y: 0.51724136}
   m_EdgeRadius: 0
 --- !u!212 &284910988
 SpriteRenderer:
@@ -215,12 +215,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cb3e4e83f397ea64991a2e62e8c137e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e679f8ae30dcfd54c9d7186fd147e332, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.08, y: 0.08}
+  m_Size: {x: 0.51724136, y: 0.51724136}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -387,7 +387,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &993158042
 GameObject:
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 993158044}
   - component: {fileID: 993158043}
   m_Layer: 0
-  m_Name: Projectile (3)
+  m_Name: Key 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -437,14 +437,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.08, y: 0.08}
-    newSize: {x: 0.08, y: 0.08}
+    oldSize: {x: 0.51724136, y: 0.51724136}
+    newSize: {x: 0.51724136, y: 0.51724136}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.08, y: 0.08}
+  m_Size: {x: 0.51724136, y: 0.51724136}
   m_EdgeRadius: 0
 --- !u!212 &993158045
 SpriteRenderer:
@@ -484,12 +484,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cb3e4e83f397ea64991a2e62e8c137e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e679f8ae30dcfd54c9d7186fd147e332, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.08, y: 0.08}
+  m_Size: {x: 0.51724136, y: 0.51724136}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -541,8 +541,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2384e081c78b4546bc42ed7cf4ab4f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
   keysText: {fileID: 1868732706}
+  projectilePrefab: {fileID: 2476050889695162712, guid: d8d6ba447ec56cd408df4ed3af55a624,
+    type: 3}
+  fireDelay: 0.2
+  shotTimer: 1
+  shotSpeed: 5
+  speed: 2
 --- !u!61 &1152553442
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -652,7 +657,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &1271639770
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,7 +671,7 @@ GameObject:
   - component: {fileID: 1271639772}
   - component: {fileID: 1271639771}
   m_Layer: 0
-  m_Name: Projectile (2)
+  m_Name: Key 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -701,14 +706,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.08, y: 0.08}
-    newSize: {x: 0.08, y: 0.08}
+    oldSize: {x: 0.51724136, y: 0.51724136}
+    newSize: {x: 0.51724136, y: 0.51724136}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.08, y: 0.08}
+  m_Size: {x: 0.51724136, y: 0.51724136}
   m_EdgeRadius: 0
 --- !u!212 &1271639773
 SpriteRenderer:
@@ -748,12 +753,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cb3e4e83f397ea64991a2e62e8c137e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e679f8ae30dcfd54c9d7186fd147e332, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.08, y: 0.08}
+  m_Size: {x: 0.51724136, y: 0.51724136}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -786,7 +791,7 @@ GameObject:
   - component: {fileID: 1474632030}
   - component: {fileID: 1474632033}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -809,14 +814,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.08, y: 0.08}
-    newSize: {x: 0.08, y: 0.08}
+    oldSize: {x: 0.51724136, y: 0.51724136}
+    newSize: {x: 0.51724136, y: 0.51724136}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.08, y: 0.08}
+  m_Size: {x: 0.51724136, y: 0.51724136}
   m_EdgeRadius: 0
 --- !u!212 &1474632031
 SpriteRenderer:
@@ -856,12 +861,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cb3e4e83f397ea64991a2e62e8c137e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e679f8ae30dcfd54c9d7186fd147e332, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.08, y: 0.08}
+  m_Size: {x: 0.51724136, y: 0.51724136}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -879,7 +884,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1474632033
 MonoBehaviour:
@@ -985,7 +990,7 @@ RectTransform:
   m_Children:
   - {fileID: 1868732705}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
