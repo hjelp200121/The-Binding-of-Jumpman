@@ -15,6 +15,9 @@ public class Baba : MonoBehaviour
 
     public float range;
     public float speed;
+    private bool chooseDirection = false;
+    private bool dead = false;
+    private Vector2 randomDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -39,18 +42,40 @@ public class Baba : MonoBehaviour
                 break;
 
         }
+
+        if (IsPlayerInRange(range) && currentState != BabaState.Die) {
+            currentState = BabaState.Follow;
+        } else if (!IsPlayerInRange(range) && currentState != BabaState.Die) {
+            currentState = BabaState.Wander;
+        }
+
     }
 
     private bool IsPlayerInRange(float range) {
         return Vector2.Distance(transform.position, player.transform.position) <= range;
     }
 
-    void Wander() {
+    private IEnumerator ChooseDirection() {
+        chooseDirection = true;
+        yield return new WaitForSeconds(Random.Range(2f, 8f));
+        randomDirection = new Vector3(0, 0, Random.Range(0, 360));
+        Quaternion nextRotation = Quaternion.Euler(randomDirection);
+        transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, Random.Range(0.5f, 2.5f));
+        chooseDirection = false;
+    }
 
+    void Wander() {
+        if (!chooseDirection) {
+            StartCoroutine(ChooseDirection());
+        }
+        transform.position += -transform.right * speed * Time.deltaTime;
+        if (IsPlayerInRange(range)) {
+            currentState = BabaState.Follow;
+        }
     }
 
     void Follow() {
-
+        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
     }
 
 }
