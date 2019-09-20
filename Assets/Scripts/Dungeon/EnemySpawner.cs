@@ -46,6 +46,7 @@ public class EnemySpawner : DungeonObject
         Enemy enemy = Instantiate<Enemy>(enemyPrefab, room.transform);
         enemy.room = room;
         enemy.transform.position = transform.position;
+        enemy.Load();
         room.contents.objectAddQueue.Enqueue(enemy);
     }
 

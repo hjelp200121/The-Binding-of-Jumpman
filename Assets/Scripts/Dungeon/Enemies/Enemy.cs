@@ -37,6 +37,7 @@ public abstract class Enemy : DungeonEntity
     public override void Load()
     {
         player = room.player;
+        Debug.Log("enemy " + player);
     }
 
     public override void UnLoad()
