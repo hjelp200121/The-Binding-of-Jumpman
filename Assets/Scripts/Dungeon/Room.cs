@@ -23,28 +23,58 @@ public class Room : MonoBehaviour
     public PlayerController player;
 
 
-    void Awake () {
-        if (contents.room == null) {
+    void Awake()
+    {
+        if (contents.room == null)
+        {
             contents = new RoomContents(this, gridWidth, gridHeight);
         }
     }
 
-    public void Load(PlayerController player) {
+    public void Load(PlayerController player)
+    {
         gameObject.SetActive(true);
         this.player = player;
         contents.Load();
     }
 
-    public void UnLoad() {
+    public void UnLoad()
+    {
         contents.UnLoad();
         this.player = null;
         gameObject.SetActive(false);
+    }
+
+    public void UpdateDoors()
+    {
+        if (contents.enemyCount > 0)
+        {
+            foreach (Door door in doors)
+            {
+                if (door != null)
+                {
+                    door.Close();
+                }
+            }
+        }
+        else
+        {
+            foreach (Door door in doors)
+            {
+                if (door != null)
+                {
+                    door.Open();
+                }
+            }
+
+        }
     }
 }
 
 /* A collection of rooms. Used by the dungeon generator. */
 [System.Serializable]
-public class RoomCollection {
+public class RoomCollection
+{
     public List<Room> rooms;
 }
 

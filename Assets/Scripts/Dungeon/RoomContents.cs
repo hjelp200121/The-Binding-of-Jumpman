@@ -16,6 +16,8 @@ public class RoomContents
     public Queue<DungeonObject> objectAddQueue;
     public Queue<DungeonObject> objectRemoveQueue;
 
+    public int enemyCount = 0;
+
 
     public RoomContents(Room room, int width, int height)
     {

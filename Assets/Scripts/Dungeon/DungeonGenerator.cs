@@ -12,7 +12,8 @@ public class DungeonGenerator : MonoBehaviour
     public Dungeon dungeon;
     [NamedArray(typeof(RoomTypes))]
     public RoomCollection[] roomPrefabs;
-    public Door doorPrefab;
+    [NamedArray(typeof(RoomTypes))]
+    public Door[] doorPrefabs;
     public int branchLength;
 
     /* Generate the dungeon. */
@@ -207,6 +208,7 @@ public class DungeonGenerator : MonoBehaviour
              * be any missing door connections. */
             return;
         }
+        Door doorPrefab = r1.type.IsSpecial() ? doorPrefabs[(int)r1.type] : doorPrefabs[(int)r2.type];
         Door d1 = Instantiate<Door>(doorPrefab, r1.transform);
         Door d2 = Instantiate<Door>(doorPrefab, r2.transform);
         d1.room = r1;
