@@ -4,30 +4,37 @@ using UnityEngine;
 
 public class Baba : BasicEnemy
 {
-    public float wanderTime = 3f;
+    public float minWanderTime = 0.5f;
+    public float maxWanderTime = 1f;
 
     float currentWander;
     Vector2 wanderDirection;
 
-    public override void Awake() {
+    public override void Awake()
+    {
         base.Awake();
-        currentWander = wanderTime;
+        currentWander = Random.Range(minWanderTime, maxWanderTime);
         wanderDirection = ChooseWanderDirection();
     }
 
-    public void Update() {
-        if ((currentWander -= Time.deltaTime) < 0f) {
-            currentWander = wanderTime;
+    public void Update()
+    {
+        if ((currentWander -= Time.deltaTime) < 0f)
+        {
+            currentWander = Random.Range(minWanderTime, maxWanderTime);
             wanderDirection = ChooseWanderDirection();
+            rb.velocity = wanderDirection * speed;
         }
     }
 
-    public void FixedUpdate() {
-        rb.AddForce(wanderDirection * speed * Time.fixedDeltaTime);
+    public void FixedUpdate()
+    {
+        rb.velocity = rb.velocity.normalized * speed;
     }
 
-    Vector2 ChooseWanderDirection() {
-        float a = Random.Range(0f, 2*Mathf.PI);
+    Vector2 ChooseWanderDirection()
+    {
+        float a = Random.Range(0f, 2 * Mathf.PI);
         return new Vector2(Mathf.Cos(a), Mathf.Sin(a));
     }
 }
