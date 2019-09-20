@@ -10,10 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 902109439479988069}
   - component: {fileID: 7187206100961675737}
+  - component: {fileID: 2186829634354158286}
   - component: {fileID: 2631866988966643447}
-  m_Layer: 0
+  - component: {fileID: 2442483744232929923}
+  m_Layer: 10
   m_Name: Wasp
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,6 +83,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2186829634354158286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2415690947551063477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c7c52e41ed2abc4a9a22ff192a96a95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  room: {fileID: 0}
+  rb: {fileID: 0}
+  flying: 1
+  baseHealth: 8.5
+  health: 0
+  baseSpeed: 0.75
+  speed: 0
 --- !u!60 &2631866988966643447
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -90,7 +111,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 2415690947551063477}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 03a237b8325be29b3a6e0143991f3115, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -115,3 +136,24 @@ PolygonCollider2D:
       - {x: 0.40116596, y: -0.15304595}
       - {x: 0.4356295, y: 0.08401233}
       - {x: 0.2907108, y: 0.19674897}
+--- !u!50 &2442483744232929923
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2415690947551063477}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 03a237b8325be29b3a6e0143991f3115, type: 2}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

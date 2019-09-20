@@ -7,8 +7,8 @@ public class Baba : BasicEnemy
     public float minWanderTime = 0.5f;
     public float maxWanderTime = 1f;
 
-    float currentWander;
-    Vector2 wanderDirection;
+    protected float currentWander;
+    protected Vector2 wanderDirection;
 
     public override void Awake()
     {

@@ -7,7 +7,7 @@ public abstract class Enemy : DungeonEntity
 {
     public float baseHealth;
     public float health;
-    protected PlayerController player;
+    public PlayerController player;
 
     public override void Awake()
     {
