@@ -171,6 +171,7 @@ MonoBehaviour:
     - {fileID: 4530702323811238272, guid: d3ece78e598058f7dbb8f22b64ee4a02, type: 3}
     - {fileID: 9126840387729290123, guid: 0e3587935b0241ff2b19ccbf09a75268, type: 3}
     - {fileID: 5822902613064849172, guid: a3591842aeaf1ec3aa5c7922ec8e5b56, type: 3}
+    - {fileID: 6907857823459394418, guid: 895510a97dccf9e2b8d3391f99d9ed0f, type: 3}
   - rooms:
     - {fileID: 7608755756700373787, guid: 907abcc0b7291c19fb3fad50144688ec, type: 3}
   - rooms:

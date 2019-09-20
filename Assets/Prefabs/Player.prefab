@@ -102,7 +102,7 @@ MonoBehaviour:
   fireDelay: 0.2
   shotTimer: 1
   shotSpeed: 5
-  speed: 2
+  speed: 10
 --- !u!50 &3984815402720974282
 Rigidbody2D:
   serializedVersion: 4
