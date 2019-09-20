@@ -99,6 +99,17 @@ public class RoomEditor : MonoBehaviour
 
         GameObject loadedRoomObject = (GameObject)PrefabUtility.InstantiatePrefab(room.gameObject);
         loadedRoom = loadedRoomObject.GetComponent<Room>();
+        foreach (DungeonTile tile in loadedRoom.contents.tiles)
+        {
+            if (tile != null)
+            {
+                tile.EnableDebug();
+            }
+        }
+        foreach (DungeonObject dungeonObject in loadedRoom.contents.objects)
+        {
+            dungeonObject.EnableDebug();
+        }
         UpdateDoorGraphics();
     }
 
@@ -204,7 +215,8 @@ public class RoomEditor : MonoBehaviour
         {
             return;
         }
-        if (activeObject == null) {
+        if (activeObject == null)
+        {
             return;
         }
         GameObject _newObject = PrefabUtility.InstantiatePrefab(activeObject.gameObject) as GameObject;
