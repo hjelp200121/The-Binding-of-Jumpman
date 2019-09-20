@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class Door : MonoBehaviour
 {
+    public SpriteRenderer spriteRenderer;
     public Sprite openSprite;
     public Sprite closedSprite;
     public Collider2D openCollider;
@@ -14,11 +14,9 @@ public class Door : MonoBehaviour
     public Door connection;
     public Directions direction;
 
-    protected SpriteRenderer spriteRenderer;
 
     public void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         Open();
     }
 
