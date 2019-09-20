@@ -103,6 +103,7 @@ MonoBehaviour:
   shotTimer: 1
   shotSpeed: 5
   speed: 10
+  accuracy: 0.1
 --- !u!50 &3984815402720974282
 Rigidbody2D:
   serializedVersion: 4

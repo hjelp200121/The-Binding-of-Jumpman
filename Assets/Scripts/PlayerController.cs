@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public float shotSpeed;
     public float speed;
     //public float knockback;
+    public float accuracy;
 
     // Start is called before the first frame update
     void Start(){
@@ -92,10 +93,10 @@ public class PlayerController : MonoBehaviour
             Projectile projectile = Instantiate<Projectile>(projectilePrefab, transform.position, transform.rotation);
             if(shootHorizontal != 0) {
                 projectile.GetComponent<Rigidbody2D>().velocity = 
-                    new Vector2(shootHorizontal * shotSpeed, shootVertical * shotSpeed + Random.Range(-0.1f, 0.1f) * shotSpeed);
+                    new Vector2(shootHorizontal * shotSpeed, shootVertical * shotSpeed + Random.Range(-accuracy, accuracy) * shotSpeed);
             } else {
                 projectile.GetComponent<Rigidbody2D>().velocity =
-                    new Vector2(shootHorizontal * shotSpeed + Random.Range(-0.1f, 0.1f) * shotSpeed, shootVertical * shotSpeed);
+                    new Vector2(shootHorizontal * shotSpeed + Random.Range(-accuracy, accuracy) * shotSpeed, shootVertical * shotSpeed);
             }
             projectile.timer = shotTimer;
         }
