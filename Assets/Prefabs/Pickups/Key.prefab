@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2367512662182949477}
   - component: {fileID: 2367512662182949476}
   - component: {fileID: 2367512662182949467}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Key
   m_TagString: Pickup
   m_Icon: {fileID: 0}
@@ -121,3 +121,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 0}
+  rb: {fileID: 0}
+  flying: 0

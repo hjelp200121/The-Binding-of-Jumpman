@@ -19,11 +19,11 @@ TagManager:
   - 
   - 
   - Room
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Flying Enemy
+  - Player
+  - Ground
+  - Pickup
   - 
   - 
   - 
