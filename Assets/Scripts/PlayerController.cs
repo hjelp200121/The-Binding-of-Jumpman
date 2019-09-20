@@ -90,7 +90,13 @@ public class PlayerController : MonoBehaviour
         if(shootHorizontal != 0 || shootVertical != 0){
             lastFire = Time.time;
             Projectile projectile = Instantiate<Projectile>(projectilePrefab, transform.position, transform.rotation);
-            projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(shootHorizontal * shotSpeed, shootVertical * shotSpeed);
+            if(shootHorizontal != 0) {
+                projectile.GetComponent<Rigidbody2D>().velocity = 
+                    new Vector2(shootHorizontal * shotSpeed, shootVertical * shotSpeed + Random.Range(-0.1f, 0.1f) * shotSpeed);
+            } else {
+                projectile.GetComponent<Rigidbody2D>().velocity =
+                    new Vector2(shootHorizontal * shotSpeed + Random.Range(-0.1f, 0.1f) * shotSpeed, shootVertical * shotSpeed);
+            }
             projectile.timer = shotTimer;
         }
     }
