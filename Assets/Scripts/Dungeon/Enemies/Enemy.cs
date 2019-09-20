@@ -8,15 +8,21 @@ public abstract class Enemy : DungeonEntity
     public float baseHealth;
     public float health;
     public PlayerController player;
+    bool alive;
 
     public override void Awake()
     {
         health = baseHealth;
+        alive = true;
         base.Awake();
     }
 
     public virtual void Die() {
-        Delete();
+        if (alive)
+        {
+            alive = false;
+            Delete();
+        }
     }
 
     public virtual void TakeDamage(float amount)
@@ -31,7 +37,7 @@ public abstract class Enemy : DungeonEntity
     public virtual void Delete()
     {
         room.contents.enemyCount--;
-        room.UpdateDoors();
+        room.UpdateCleared();
         room.contents.objectRemoveQueue.Enqueue(this);
         Destroy(gameObject);
     }

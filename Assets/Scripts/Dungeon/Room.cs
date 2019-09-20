@@ -21,10 +21,12 @@ public class Room : MonoBehaviour
     public RoomContents contents;
 
     public PlayerController player;
+    public bool cleared;
 
 
     void Awake()
     {
+        cleared = false;
         if (contents.room == null)
         {
             contents = new RoomContents(this, gridWidth, gridHeight);
@@ -36,6 +38,7 @@ public class Room : MonoBehaviour
         gameObject.SetActive(true);
         this.player = player;
         contents.Load();
+        UpdateCleared();
     }
 
     public void UnLoad()
@@ -45,10 +48,11 @@ public class Room : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void UpdateDoors()
+    public void UpdateCleared()
     {
         if (contents.enemyCount > 0)
         {
+            cleared = false;
             foreach (Door door in doors)
             {
                 if (door != null)
@@ -59,6 +63,7 @@ public class Room : MonoBehaviour
         }
         else
         {
+            cleared = true;
             foreach (Door door in doors)
             {
                 if (door != null)

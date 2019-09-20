@@ -49,12 +49,15 @@ public class EnemySpawner : DungeonObject
         enemy.Load();
         room.contents.objectAddQueue.Enqueue(enemy);
         room.contents.enemyCount++;
-        room.UpdateDoors();
+        room.UpdateCleared();
     }
 
     public override void Load()
     {
-        SpawnEnemy();
+        if (!room.cleared)
+        {
+            SpawnEnemy();
+        }
         gameObject.SetActive(true);
     }
     public override void UnLoad()

@@ -41,6 +41,14 @@ public class RoomContents
 
     public void Load()
     {
+        if (objectAddQueue == null)
+        {
+            objectAddQueue = new Queue<DungeonObject>();
+        }
+        if (objectRemoveQueue == null)
+        {
+            objectRemoveQueue = new Queue<DungeonObject>();
+        }
         foreach (DungeonTile tile in tiles)
         {
             if (tile != null)
@@ -49,8 +57,11 @@ public class RoomContents
             }
         }
 
-        objectAddQueue = new Queue<DungeonObject>();
-
+        while (objectAddQueue.Count > 0)
+        {
+            DungeonObject addObject = objectAddQueue.Dequeue();
+            objects.Add(addObject);
+        }
         foreach (DungeonObject dungeonObject in objects)
         {
             dungeonObject.Load();
@@ -64,6 +75,14 @@ public class RoomContents
 
     public void UnLoad()
     {
+        if (objectAddQueue == null)
+        {
+            objectAddQueue = new Queue<DungeonObject>();
+        }
+        if (objectRemoveQueue == null)
+        {
+            objectRemoveQueue = new Queue<DungeonObject>();
+        }
         foreach (DungeonTile tile in tiles)
         {
             if (tile != null)
@@ -72,8 +91,12 @@ public class RoomContents
             }
         }
 
-        objectRemoveQueue = new Queue<DungeonObject>();
-        
+
+        while (objectRemoveQueue.Count > 0)
+        {
+            DungeonObject removeObject = objectRemoveQueue.Dequeue();
+            objects.Remove(removeObject);
+        }
         foreach (DungeonObject dungeonObject in objects)
         {
             dungeonObject.UnLoad();

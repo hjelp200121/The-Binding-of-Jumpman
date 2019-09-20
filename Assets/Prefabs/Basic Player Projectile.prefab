@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2476050889695162712}
   - component: {fileID: -3376791232114755317}
   - component: {fileID: 3007398839458763642}
-  m_Layer: 0
-  m_Name: ProjectilePrefab
+  m_Layer: 14
+  m_Name: Basic Player Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af4dab0b6ec884448f34d2b48a16612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
+  fromPlayer: 0
   timer: 0
+  sender: {fileID: 0}
 --- !u!50 &-3376791232114755317
 Rigidbody2D:
   serializedVersion: 4

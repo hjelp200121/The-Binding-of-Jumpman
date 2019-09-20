@@ -30,7 +30,7 @@ public class DoorLocked : Door
                 player.keys--;
                 locked = false;
                 (connection as DoorLocked).locked = false;
-                room.UpdateDoors();
+                room.UpdateCleared();
             }
         }
     }
