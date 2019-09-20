@@ -17,7 +17,7 @@ public class Baba : BasicEnemy
         wanderDirection = ChooseWanderDirection();
     }
 
-    public void Update()
+    public virtual void Update()
     {
         if ((currentWander -= Time.deltaTime) < 0f)
         {
