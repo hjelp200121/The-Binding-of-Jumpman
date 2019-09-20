@@ -9,4 +9,13 @@ public abstract class DungeonObject : MonoBehaviour
 
     public abstract void Load();
     public abstract void UnLoad();
+
+    public virtual void EnableDebug()
+    {
+        return;
+    }
+    public virtual void DisableDebug()
+    {
+        return;
+    }
 }

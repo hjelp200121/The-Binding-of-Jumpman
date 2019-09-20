@@ -9,7 +9,7 @@ using UnityEditor;
 public class DungeonGenerator : MonoBehaviour
 {
     /* The root-object of the dungeon. */
-    public Transform roomParent;
+    public Dungeon dungeon;
     [NamedArray(typeof(RoomTypes))]
     public RoomCollection[] roomPrefabs;
     public Door doorPrefab;
@@ -19,7 +19,8 @@ public class DungeonGenerator : MonoBehaviour
     void Awake()
     {
         List<RoomInfo> roomInfos = GenerateRoomInfo();
-        InstantiateRoooms(roomInfos);
+        List<Room> rooms = InstantiateRooms(roomInfos);
+        dungeon.rooms = rooms;
     }
 
     public List<RoomInfo> GenerateRoomInfo()
@@ -55,7 +56,7 @@ public class DungeonGenerator : MonoBehaviour
         return rooms;
     }
 
-    public void InstantiateRoooms(List<RoomInfo> roomInfos)
+    public List<Room> InstantiateRooms(List<RoomInfo> roomInfos)
     {
         List<Room> rooms = new List<Room>();
 
@@ -88,6 +89,7 @@ public class DungeonGenerator : MonoBehaviour
 
             rooms.Add(room);
         }
+        return rooms;
     }
 
     Room spawnRoom(RoomInfo roomInfo)
@@ -111,7 +113,7 @@ public class DungeonGenerator : MonoBehaviour
         List<Room> validRooms = rooms.rooms.FindAll(r => ((r.doorMask ^ doorMask) & doorMask) == 0);
         /* Select a random room to instantiate. */
         int index = Random.Range(0, validRooms.Count);
-        Room room = Instantiate<Room>(validRooms[index], roomParent);
+        Room room = Instantiate<Room>(validRooms[index], dungeon.transform);
         room.x = roomInfo.x;
         room.y = roomInfo.y;
         room.type = roomInfo.type;
@@ -132,6 +134,7 @@ public class DungeonGenerator : MonoBehaviour
 
 
         room.transform.position = new Vector2(roomInfo.x * room.width, roomInfo.y * room.height);
+        room.UnLoad();
 
         return room;
     }

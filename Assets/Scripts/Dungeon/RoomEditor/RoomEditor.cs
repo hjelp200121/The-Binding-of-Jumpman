@@ -66,7 +66,8 @@ public class RoomEditor : MonoBehaviour
             Destroy(loadedRoom.gameObject);
         }
 
-        loadedRoom = Instantiate<Room>(room);
+        GameObject loadedRoomObject = (GameObject)PrefabUtility.InstantiatePrefab(room.gameObject);
+        loadedRoom = loadedRoomObject.GetComponent<Room>();
         UpdateDoorGraphics();
     }
 
@@ -170,7 +171,9 @@ public class RoomEditor : MonoBehaviour
         DungeonTile newTile = null;
         if (activeTile != null)
         {
-            newTile = Instantiate<DungeonTile>(activeTile, loadedRoom.transform);
+            GameObject newTileObject = PrefabUtility.InstantiatePrefab(activeTile.gameObject) as GameObject;
+            newTile = newTileObject.GetComponent<Rock>();
+            newTile.transform.SetParent(loadedRoom.transform);
             newTile.x = x;
             newTile.y = y;
             Vector2 postion;
@@ -219,7 +222,7 @@ public class RoomEditor : MonoBehaviour
                 }
                 else
                 {
-                    door.transform.position = d.ToVector() * (loadedRoom.width -1f) / 2f;
+                    door.transform.position = d.ToVector() * (loadedRoom.width - 1f) / 2f;
                 }
 
                 door.transform.position = loadedRoom.transform.TransformPoint(door.transform.position);

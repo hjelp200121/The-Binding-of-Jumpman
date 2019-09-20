@@ -8,7 +8,7 @@ public enum BabaState {
     Die,
 };
 
-public class Baba : MonoBehaviour
+public class Baba : Enemy
 {
     GameObject player;
     public BabaState currentState = BabaState.Wander;
@@ -17,7 +17,7 @@ public class Baba : MonoBehaviour
     public float speed;
     private bool chooseDirection = false;
     private bool dead = false;
-    private Vector2 randomDirection;
+    private Vector3 randomDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +59,7 @@ public class Baba : MonoBehaviour
         chooseDirection = true;
         yield return new WaitForSeconds(Random.Range(2f, 8f));
         randomDirection = new Vector3(0, 0, Random.Range(0, 360));
+        Debug.Log(randomDirection);
         Quaternion nextRotation = Quaternion.Euler(randomDirection);
         transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, Random.Range(0.5f, 2.5f));
         chooseDirection = false;
