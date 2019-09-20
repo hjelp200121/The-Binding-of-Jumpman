@@ -8,6 +8,7 @@ TagManager:
   - Room Wall
   - Room
   - Pickup
+  - Enemy
   layers:
   - Default
   - TransparentFX
