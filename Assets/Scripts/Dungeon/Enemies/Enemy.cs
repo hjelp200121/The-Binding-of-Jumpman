@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public abstract class Enemy : DungeonEntity
 {
-    public SpriteRenderer renderer;
     public float baseHealth;
-    float health;
-    PlayerController player;
+    public float health;
+    protected PlayerController player;
 
     public override void Awake()
     {
@@ -30,6 +30,7 @@ public abstract class Enemy : DungeonEntity
 
     public virtual void Delete()
     {
+        room.contents.objectRemoveQueue.Enqueue(this);
         Destroy(gameObject);
     }
 

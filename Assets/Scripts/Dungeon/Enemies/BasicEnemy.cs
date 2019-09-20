@@ -6,7 +6,8 @@ public class BasicEnemy : Enemy
 {
     public float baseSpeed;
 
-    float speed;
+    [HideInInspector]
+    public float speed;
 
     public override void Awake() {
         speed = baseSpeed;

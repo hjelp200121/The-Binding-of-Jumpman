@@ -6,11 +6,15 @@ using UnityEngine;
 public class RoomContents
 {
     public int width, height;
+    [SerializeField]
     public Room room;
 
     public DungeonTile[] tiles;
 
     public List<DungeonObject> objects;
+
+    public Queue<DungeonObject> objectAddQueue;
+    public Queue<DungeonObject> objectRemoveQueue;
 
 
     public RoomContents(Room room, int width, int height)
@@ -22,7 +26,6 @@ public class RoomContents
         this.objects = new List<DungeonObject>();
     }
 
-
     public DungeonTile GetTile(int x, int y)
     {
         return tiles[x + y * width];
@@ -31,6 +34,7 @@ public class RoomContents
     public void SetTile(DungeonTile tile, int x, int y)
     {
         tiles[x + y * width] = tile;
+
     }
 
     public void Load()
@@ -42,8 +46,17 @@ public class RoomContents
                 tile.Load();
             }
         }
-        foreach (DungeonEntity entity in objects) {
-            entity.Load();
+
+        objectAddQueue = new Queue<DungeonObject>();
+
+        foreach (DungeonObject dungeonObject in objects)
+        {
+            dungeonObject.Load();
+        }
+        while (objectAddQueue.Count > 0)
+        {
+            DungeonObject addObject = objectAddQueue.Dequeue();
+            objects.Add(addObject);
         }
     }
 
@@ -56,8 +69,17 @@ public class RoomContents
                 tile.UnLoad();
             }
         }
-        foreach (DungeonEntity entity in objects) {
-            entity.UnLoad();
+
+        objectRemoveQueue = new Queue<DungeonObject>();
+        
+        foreach (DungeonObject dungeonObject in objects)
+        {
+            dungeonObject.UnLoad();
+        }
+        while (objectRemoveQueue.Count > 0)
+        {
+            DungeonObject removeObject = objectRemoveQueue.Dequeue();
+            objects.Remove(removeObject);
         }
     }
 }

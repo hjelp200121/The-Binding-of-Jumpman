@@ -6,11 +6,17 @@ using UnityEngine.UI;
 
 public class RoomEditor : MonoBehaviour
 {
+    public enum DungeonObjectType
+    {
+        TILE, OBJECT
+    }
+
     static string roomPrefabPath = "Assets/Resources/Rooms/";
     static string roomResourcePath = "Rooms/";
     static string defaultRoomName = "Room-Common-0-000";
 
     public DungeonTile[] tiles;
+    public DungeonObject[] objects;
 
     public InputField roomNameInput;
     public GameObject doorGraphicPrefab;
@@ -18,10 +24,17 @@ public class RoomEditor : MonoBehaviour
     public GameObject[] doors;
     Room loadedRoom = null;
     DungeonTile activeTile;
+    DungeonObject activeObject;
+
+    /* Which dungeon object is currently active? A tile or a general object? */
+    DungeonObjectType activeObjectType;
+
     // Start is called before the first frame update
     void Awake()
     {
+        activeObjectType = DungeonObjectType.TILE;
         activeTile = tiles[0];
+        activeObject = objects[0];
     }
 
     // Update is called once per frame
@@ -33,10 +46,28 @@ public class RoomEditor : MonoBehaviour
         }
     }
 
-    public void SelectTile(Dropdown change)
+    public void SetObjectMode(int type)
+    {
+        SetObjectMode((DungeonObjectType)type);
+    }
+
+    public void SetObjectMode(DungeonObjectType type)
+    {
+        activeObjectType = type;
+    }
+
+    public void SelectObject(Dropdown change)
     {
         int index = change.value;
-        activeTile = tiles[index];
+        if (activeObjectType == DungeonObjectType.OBJECT)
+        {
+            activeObject = objects[index];
+
+        }
+        else if (activeObjectType == DungeonObjectType.TILE)
+        {
+            activeTile = tiles[index];
+        }
     }
 
     public void NewRoom()
@@ -109,7 +140,21 @@ public class RoomEditor : MonoBehaviour
                                                 0, Room.gridWidth - 1);
                 tileCoordinates.y = Mathf.Clamp(tileCoordinates.y + Room.gridHeight / 2f,
                                                 0, Room.gridHeight - 1);
-                EditTile((int)tileCoordinates.x, (int)tileCoordinates.y);
+                /* If the active object type is a tile, edit the selected tile. */
+                if (activeObjectType == DungeonObjectType.TILE)
+                {
+                    EditTile((int)tileCoordinates.x, (int)tileCoordinates.y);
+                }
+                /* If the active object type is an object, add the selected object. */
+                else if (activeObjectType == DungeonObjectType.OBJECT)
+                {
+                    /* Only add an object on the first frame the button is pushed down. */
+                    if (!Input.GetMouseButtonDown(0))
+                    {
+                        return;
+                    }
+                    AddObject((int)tileCoordinates.x, (int)tileCoordinates.y);
+                }
             }
             else if (hit.collider.tag == "Room Wall")
             {
@@ -150,11 +195,31 @@ public class RoomEditor : MonoBehaviour
                 EditWall(direction);
                 UpdateDoorGraphics();
             }
-            else
-            {
-                Debug.Log("Hit a: " + hit.collider.gameObject.name);
-            }
         }
+    }
+
+    void AddObject(int x, int y)
+    {
+        if (x < 0 || y < 0 || x >= Room.gridWidth || y >= Room.gridHeight)
+        {
+            return;
+        }
+        if (activeObject == null) {
+            return;
+        }
+        GameObject _newObject = PrefabUtility.InstantiatePrefab(activeObject.gameObject) as GameObject;
+        DungeonObject newObject = _newObject.GetComponent<DungeonObject>();
+        newObject.transform.SetParent(loadedRoom.transform);
+
+        Vector2 postion;
+        postion.x = x - Room.gridWidth / 2f + .5f;
+        postion.y = y - Room.gridHeight / 2f + .5f;
+        newObject.transform.position = loadedRoom.transform.TransformPoint(postion);
+
+        newObject.room = loadedRoom;
+        newObject.EnableDebug();
+
+        loadedRoom.contents.objects.Add(newObject);
     }
 
     void EditTile(int x, int y)
@@ -171,8 +236,8 @@ public class RoomEditor : MonoBehaviour
         DungeonTile newTile = null;
         if (activeTile != null)
         {
-            GameObject newTileObject = PrefabUtility.InstantiatePrefab(activeTile.gameObject) as GameObject;
-            newTile = newTileObject.GetComponent<Rock>();
+            GameObject _newTile = PrefabUtility.InstantiatePrefab(activeTile.gameObject) as GameObject;
+            newTile = _newTile.GetComponent<DungeonTile>();
             newTile.transform.SetParent(loadedRoom.transform);
             newTile.x = x;
             newTile.y = y;
@@ -180,7 +245,11 @@ public class RoomEditor : MonoBehaviour
             postion.x = x - Room.gridWidth / 2f + .5f;
             postion.y = y - Room.gridHeight / 2f + .5f;
             newTile.transform.position = loadedRoom.transform.TransformPoint(postion);
+
+            newTile.room = loadedRoom;
+            newTile.EnableDebug();
         }
+
         loadedRoom.contents.SetTile(newTile, x, y);
     }
 

@@ -8,20 +8,45 @@ public class EnemySpawner : DungeonObject
     public Enemy enemyPrefab;
 
     SpriteRenderer debugRenderer;
+    Sprite oldDebugSprite;
 
     void Awake()
     {
         debugRenderer = GetComponent<SpriteRenderer>();
-        if (enemyPrefab != null) {
-            debugRenderer.sprite = enemyPrefab.renderer.sprite;
-        }
-        debugRenderer.enabled = false;
+        UpdateDebugSprite();
+        DisableDebug();
     }
 
-    public void SpawnEnemy() {
+    void Update()
+    {
+        if (debugRenderer.enabled)
+        {
+            if (oldDebugSprite != debugRenderer.sprite)
+            {
+                UpdateDebugSprite();
+            }
+        }
+    }
+
+    void UpdateDebugSprite()
+    {
+        if (enemyPrefab != null)
+        {
+            debugRenderer.sprite = enemyPrefab.GetComponent<SpriteRenderer>().sprite;
+            oldDebugSprite = debugRenderer.sprite;
+        }
+        else
+        {
+            oldDebugSprite = null;
+        }
+    }
+
+    public void SpawnEnemy()
+    {
         Enemy enemy = Instantiate<Enemy>(enemyPrefab, room.transform);
+        enemy.room = room;
         enemy.transform.position = transform.position;
-        room.contents.objects.Add(enemy);
+        room.contents.objectAddQueue.Enqueue(enemy);
     }
 
     public override void Load()
