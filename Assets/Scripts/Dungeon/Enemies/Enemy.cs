@@ -30,6 +30,8 @@ public abstract class Enemy : DungeonEntity
 
     public virtual void Delete()
     {
+        room.contents.enemyCount--;
+        room.UpdateDoors();
         room.contents.objectRemoveQueue.Enqueue(this);
         Destroy(gameObject);
     }

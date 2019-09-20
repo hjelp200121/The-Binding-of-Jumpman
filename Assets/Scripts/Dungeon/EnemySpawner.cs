@@ -47,6 +47,8 @@ public class EnemySpawner : DungeonObject
         enemy.room = room;
         enemy.transform.position = transform.position;
         room.contents.objectAddQueue.Enqueue(enemy);
+        room.contents.enemyCount++;
+        room.UpdateDoors();
     }
 
     public override void Load()

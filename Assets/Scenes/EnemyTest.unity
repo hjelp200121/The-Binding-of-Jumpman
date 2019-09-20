@@ -186,8 +186,11 @@ MonoBehaviour:
     - {fileID: 7608755756700373787, guid: 907abcc0b7291c19fb3fad50144688ec, type: 3}
   - rooms:
     - {fileID: 7388534672225945791, guid: 95e0e756301311cb49def92f3b437ebc, type: 3}
-  doorPrefab: {fileID: 81273451511501957, guid: ef8e175ccdeb80c119756964767434ee,
-    type: 3}
+  doorPrefabs:
+  - {fileID: 8678755084259120714, guid: bb5fb79e84d22ea7b84fbd25058deaea, type: 3}
+  - {fileID: 8678755084259120714, guid: bb5fb79e84d22ea7b84fbd25058deaea, type: 3}
+  - {fileID: 6004600028432738531, guid: c443b138f57d60c20a8b11ff00803921, type: 3}
+  - {fileID: 5114638550573253100, guid: 2a97a11d591d0faa6bb10108e857c30e, type: 3}
   branchLength: 1
 --- !u!4 &140820791
 Transform:
@@ -235,6 +238,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
     type: 3}
   rooms: []
+  floor: 0
 --- !u!4 &348688145
 Transform:
   m_ObjectHideFlags: 0
