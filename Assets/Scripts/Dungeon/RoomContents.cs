@@ -10,7 +10,7 @@ public class RoomContents
 
     public DungeonTile[] tiles;
 
-    public List<DungeonEntity> entities;
+    public List<DungeonObject> objects;
 
 
     public RoomContents(Room room, int width, int height)
@@ -19,7 +19,7 @@ public class RoomContents
         this.width = width;
         this.height = height;
         this.tiles = new DungeonTile[width * height];
-        this.entities = new List<DungeonEntity>();
+        this.objects = new List<DungeonObject>();
     }
 
 
@@ -42,7 +42,7 @@ public class RoomContents
                 tile.Load();
             }
         }
-        foreach (DungeonEntity entity in entities) {
+        foreach (DungeonEntity entity in objects) {
             entity.Load();
         }
     }
@@ -56,7 +56,7 @@ public class RoomContents
                 tile.UnLoad();
             }
         }
-        foreach (DungeonEntity entity in entities) {
+        foreach (DungeonEntity entity in objects) {
             entity.UnLoad();
         }
     }
