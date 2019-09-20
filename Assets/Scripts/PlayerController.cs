@@ -20,6 +20,8 @@ public class PlayerController : DungeonEntity
     public float fireDelay;
     public float shotTimer;
     public float shotSpeed;
+    public float accuracy;
+    //public float knockback;
     public float speed;
     public float invincibilityOnDamage;
     [HideInInspector]
@@ -140,7 +142,13 @@ public class PlayerController : DungeonEntity
         {
             lastFire = Time.time;
             Projectile projectile = Instantiate<Projectile>(projectilePrefab, transform.position, transform.rotation);
-            projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(shootHorizontal * shotSpeed, shootVertical * shotSpeed);
+            if(shootHorizontal != 0) {
+                projectile.GetComponent<Rigidbody2D>().velocity = 
+                    new Vector2(shootHorizontal * shotSpeed, shootVertical * shotSpeed + Random.Range(-accuracy, accuracy) * shotSpeed);
+            } else {
+                projectile.GetComponent<Rigidbody2D>().velocity =
+                    new Vector2(shootHorizontal * shotSpeed + Random.Range(-accuracy, accuracy) * shotSpeed, shootVertical * shotSpeed);
+            }
             projectile.timer = shotTimer;
             projectile.damage = damage;
             projectile.fromPlayer = true;

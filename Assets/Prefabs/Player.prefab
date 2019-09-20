@@ -108,6 +108,7 @@ MonoBehaviour:
   fireDelay: 0.2
   shotTimer: 1
   shotSpeed: 5
+  accuracy: 0.1
   speed: 10
   invincibilityOnDamage: 1
   invincibilityTime: 0
