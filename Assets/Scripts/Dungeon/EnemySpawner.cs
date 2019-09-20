@@ -15,6 +15,7 @@ public class EnemySpawner : DungeonObject
         if (enemyPrefab != null) {
             debugRenderer.sprite = enemyPrefab.renderer.sprite;
         }
+        debugRenderer.enabled = false;
     }
 
     public void SpawnEnemy() {
