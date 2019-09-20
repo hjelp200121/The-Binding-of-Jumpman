@@ -159,6 +159,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     objects: []
+    enemyCount: 0
   player: {fileID: 0}
 --- !u!1 &5039056160082619102
 GameObject:
@@ -230,7 +231,7 @@ SpriteRenderer:
   m_SortingLayerID: -155539131
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 07ee60268cbbe3de39e8cb79eaf60c58, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5551d948a45bac44fa894bba132e5e5a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -258,7 +259,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 13, y: 7}
+    oldSize: {x: 15, y: 9}
     newSize: {x: 3.77, y: 2.03}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -350,7 +351,7 @@ SpriteRenderer:
   m_SortingLayerID: -155539131
   m_SortingLayer: -1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: bf4fb8ee05581b5eda581a34ac99f7eb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e02d5d36ab839942846b52570427de0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

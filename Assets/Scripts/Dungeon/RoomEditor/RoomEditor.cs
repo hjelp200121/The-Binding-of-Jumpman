@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -13,7 +14,7 @@ public class RoomEditor : MonoBehaviour
 
     static string roomPrefabPath = "Assets/Resources/Rooms/";
     static string roomResourcePath = "Rooms/";
-    static string defaultRoomName = "Room-Common-0-000";
+    static string defaultRoomName = "Room-Common-{0}-000";
 
     public DungeonTile[] tiles;
     public DungeonObject[] objects;
@@ -25,6 +26,7 @@ public class RoomEditor : MonoBehaviour
     Room loadedRoom = null;
     DungeonTile activeTile;
     DungeonObject activeObject;
+    FloorName floor;
 
     /* Which dungeon object is currently active? A tile or a general object? */
     DungeonObjectType activeObjectType;
@@ -32,6 +34,7 @@ public class RoomEditor : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        floor = FloorName.GARDEN;
         activeObjectType = DungeonObjectType.TILE;
         activeTile = tiles[0];
         activeObject = objects[0];
@@ -70,9 +73,15 @@ public class RoomEditor : MonoBehaviour
         }
     }
 
+    public void SelectFloor(Dropdown change)
+    {
+        floor = (FloorName)change.value;
+    }
+
     public void NewRoom()
     {
-        LoadRoom(defaultRoomName);
+        string roomName = String.Format(defaultRoomName, (int)floor);
+        LoadRoom(roomName);
     }
 
     public void LoadRoom()
