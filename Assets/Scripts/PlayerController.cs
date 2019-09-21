@@ -8,10 +8,15 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Animator))]
 public class PlayerController : DungeonEntity
 {
-    public int keys = 0;
+    public int keyCount = 0;
     public Projectile projectilePrefab;
     private float lastFire;
     private bool lookShoot;
+
+    public RectTransform healthPanel;
+    public Text keyText, bombText;
+    public Image activeItemImage;
+    public Slider activeItemChargeBar;
 
     // Actual ingame stats
     public int maxHealth;
@@ -25,9 +30,12 @@ public class PlayerController : DungeonEntity
     public float speed;
     public float invincibilityOnDamage;
 
+    public Image healthImagePrefab;
+    public Sprite[] healthSprites;
+
     public ActiveItem activeItem;
     public List<Item> items;
-    
+
     [HideInInspector]
     public float invincibilityTime;
     [HideInInspector]
@@ -49,6 +57,14 @@ public class PlayerController : DungeonEntity
         animator = GetComponent<Animator>();
         blinkRoutine = Blink(0.2f);
         items = new List<Item>();
+
+        healthPanel = GameObject.Find("Health Panel").GetComponent<RectTransform>();
+        keyText = GameObject.Find("Keys Text").GetComponent<Text>();
+        bombText = GameObject.Find("Bombs Text").GetComponent<Text>();
+        activeItemImage = GameObject.Find("Active Item Image").GetComponent<Image>();
+        activeItemChargeBar = GameObject.Find("Active Item Charge Bar").GetComponent<Slider>();
+
+        UpdateUI();
     }
 
     // Update is called once per frame
@@ -65,6 +81,10 @@ public class PlayerController : DungeonEntity
         {
             StartCoroutine(blinkRoutine);
             invincible = true;
+        }
+        if (Input.GetKey("space") && activeItem != null)
+        {
+            activeItem.Use(this);
         }
         Shoot();
         Move();
@@ -110,8 +130,101 @@ public class PlayerController : DungeonEntity
         rb.velocity = new Vector2(horizontal, vertical);
     }
 
+    public void UpdateUI()
+    {
+        /* Update health. */
+        if (healthPanel != null)
+        {
+            Image[] _hpImages = healthPanel.GetComponentsInChildren<Image>();
+            List<Image> hpImages = new List<Image>(_hpImages);
+            hpImages.RemoveAt(0);
+            if (hpImages.Count > Mathf.Ceil(maxHealth / 2f))
+            {
+                int tooMany = hpImages.Count - (int)Mathf.Ceil(maxHealth / 2f);
+                for (int i = 0; i < tooMany; i++)
+                {
+                    int j = hpImages.Count - i - 1;
+                    hpImages.RemoveAt(j);
+                    Destroy(hpImages[j].gameObject);
+                }
+            }
+            else if (hpImages.Count < Mathf.Ceil(maxHealth / 2f))
+            {
+                int tooFew = (int)Mathf.Ceil(maxHealth / 2f) - hpImages.Count;
+                for (int i = 0; i < tooFew; i++)
+                {
+                    Image hpImage = Instantiate<Image>(healthImagePrefab, healthPanel);
+                    hpImage.rectTransform.Translate(
+                        Vector2.right * (hpImages.Count + i) * hpImage.rectTransform.rect.width / 2);
+                    hpImages.Add(hpImage);
+                }
+            }
+            int index = 0;
+            for (; index < health / 2; index++)
+            {
+                Image hpImage = hpImages[index];
+                hpImage.sprite = healthSprites[2];
+            }
+            if (health % 2 == 1)
+            {
+                Image hpImage = hpImages[index++];
+                hpImage.sprite = healthSprites[1];
+            }
+            for (; index < maxHealth / 2; index++)
+            {
+                Image hpImage = hpImages[index];
+                hpImage.sprite = healthSprites[0];
+            }
+        }
+        /* Update keys. */
+        if (keyText != null)
+        {
+            keyText.text = keyCount.ToString("00");
+        }
+        /* Update bombs. */
+        if (bombText != null)
+        {
+            // ...
+        }
+        /* Update active item. */
+        if (activeItemImage != null && activeItemChargeBar != null)
+        {
+            if (activeItem == null)
+            {
+                activeItemImage.gameObject.SetActive(false);
+                activeItemChargeBar.gameObject.SetActive(false);
+            }
+            else
+            {
+                activeItemImage.gameObject.SetActive(true);
+
+                activeItemImage.sprite = Resources.Load<Sprite>(activeItem.SpritePath);
+                if (activeItemImage.sprite == null)
+                {
+                    Debug.LogError("No sprite at '" + activeItem.SpritePath + "'.");
+                }
+                if (activeItem is DiscreteActiveItem)
+                {
+                    DiscreteActiveItem dActiveItem = activeItem as DiscreteActiveItem;
+                    activeItemChargeBar.gameObject.SetActive(true);
+                    activeItemChargeBar.maxValue = dActiveItem.MaxCharge;
+                    activeItemChargeBar.wholeNumbers = true;
+                    activeItemChargeBar.value = dActiveItem.Charge;
+                }
+                else
+                {
+                    activeItemChargeBar.gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
     public void Shoot()
     {
+        /* Johan ændrer denne her method den er dum.
+         * Shoot burde skyde, ikke andet.
+         * Lav en anden method der tjekker om man kan skyde / om spilleren vil skyde.
+         * Og så brug `Directions` enumeratoren, den gør ting nemmerer. */
         float shootHorizontal = 0;
         float shootVertical = 0;
         if (Input.GetKey("left") && Time.time > lastFire + fireDelay)
@@ -147,10 +260,13 @@ public class PlayerController : DungeonEntity
         {
             lastFire = Time.time;
             Projectile projectile = Instantiate<Projectile>(projectilePrefab, transform.position, transform.rotation);
-            if(shootHorizontal != 0) {
-                projectile.GetComponent<Rigidbody2D>().velocity = 
+            if (shootHorizontal != 0)
+            {
+                projectile.GetComponent<Rigidbody2D>().velocity =
                     new Vector2(shootHorizontal * shotSpeed, shootVertical * shotSpeed + Random.Range(-accuracy, accuracy) * shotSpeed);
-            } else {
+            }
+            else
+            {
                 projectile.GetComponent<Rigidbody2D>().velocity =
                     new Vector2(shootHorizontal * shotSpeed + Random.Range(-accuracy, accuracy) * shotSpeed, shootVertical * shotSpeed);
             }
@@ -172,11 +288,46 @@ public class PlayerController : DungeonEntity
         {
             return;
         }
-        if ((health -= amount) < 0)
+        if ((health -= amount) <= 0)
         {
+            health = 0;
             Die(source);
         }
         invincibilityTime += invincibilityOnDamage;
+        UpdateUI();
+    }
+
+    public void Heal(int amount)
+    {
+        if ((health += amount) > maxHealth)
+        {
+            health = maxHealth;
+        }
+        UpdateUI();
+    }
+
+    public void OnRoomClear()
+    {
+        if (activeItem is DiscreteActiveItem)
+        {
+            (activeItem as DiscreteActiveItem).ChargeItem();
+            UpdateUI();
+        }
+    }
+
+    public void PickUpItem(ItemPedestal pedestal, Item item)
+    {
+        if (item.IsActive)
+        {
+            pedestal.item = activeItem;
+            activeItem = item as ActiveItem;
+        }
+        else
+        {
+            items.Add(item);
+            pedestal.item = null;
+        }
+        UpdateUI();
     }
 
     public override void Load() { }

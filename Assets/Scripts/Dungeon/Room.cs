@@ -22,11 +22,13 @@ public class Room : MonoBehaviour
 
     public PlayerController player;
     public bool cleared;
+    public bool discovered;
 
 
     void Awake()
     {
-        cleared = false;
+        cleared = true;
+        discovered = false;
         if (contents.room == null)
         {
             contents = new RoomContents(this, gridWidth, gridHeight);
@@ -39,6 +41,7 @@ public class Room : MonoBehaviour
         this.player = player;
         contents.Load();
         UpdateCleared();
+        discovered = true;
     }
 
     public void UnLoad()
@@ -63,6 +66,9 @@ public class Room : MonoBehaviour
         }
         else
         {
+            if (!cleared) {
+                OnClear();
+            }
             cleared = true;
             foreach (Door door in doors)
             {
@@ -73,6 +79,10 @@ public class Room : MonoBehaviour
             }
 
         }
+    }
+
+    void OnClear() {
+        player.OnRoomClear();
     }
 }
 

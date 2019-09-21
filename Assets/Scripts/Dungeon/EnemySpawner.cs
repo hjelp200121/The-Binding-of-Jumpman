@@ -54,7 +54,7 @@ public class EnemySpawner : DungeonObject
 
     public override void Load()
     {
-        if (!room.cleared)
+        if (!room.discovered || !room.cleared)
         {
             SpawnEnemy();
         }

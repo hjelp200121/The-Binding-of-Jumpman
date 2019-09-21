@@ -99,9 +99,12 @@ MonoBehaviour:
   room: {fileID: 0}
   rb: {fileID: 0}
   flying: 0
-  keys: 1
+  keyCount: 1
   projectilePrefab: {fileID: 2476050889695162712, guid: d8d6ba447ec56cd408df4ed3af55a624,
     type: 3}
+  healthPanel: {fileID: 0}
+  keyText: {fileID: 0}
+  bombText: {fileID: 0}
   maxHealth: 6
   health: 0
   damage: 3.5
@@ -111,6 +114,12 @@ MonoBehaviour:
   accuracy: 0.1
   speed: 10
   invincibilityOnDamage: 1
+  healthImagePrefab: {fileID: 1735337244283639792, guid: 81688c4817e62b5a49d35a54de704516,
+    type: 3}
+  healthSprites:
+  - {fileID: 21300000, guid: ce31b9deee2c2fc42be3ac57c74e5cc7, type: 3}
+  - {fileID: 21300000, guid: 8fafb1719fc847740a32f09aae9256f3, type: 3}
+  - {fileID: 21300000, guid: 44056f475755184439132e25b29d5dd1, type: 3}
   invincibilityTime: 0
   invincible: 0
 --- !u!50 &3984815402720974282

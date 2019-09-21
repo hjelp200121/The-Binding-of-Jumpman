@@ -38,15 +38,26 @@ public class ItemPedestal : DungeonEntity
              * Set the original position & choose a random item. */
             origPosition = transform.localPosition;
             item = pool.GetRandomItem();
-            itemRenderer.sprite = Resources.Load<Sprite>(item.SpritePath);
-            if (itemRenderer.sprite == null)
-            {
-                Debug.LogError("No sprite at '" + item.SpritePath + "'.");
-            }
         }
         loadedBefore = true;
+        UpdateSpriteRenderer();
         gameObject.SetActive(true);
     }
+
+    void UpdateSpriteRenderer()
+    {
+        if (item == null)
+        {
+            itemRenderer.sprite = null;
+            return;
+        }
+        itemRenderer.sprite = Resources.Load<Sprite>(item.SpritePath);
+        if (itemRenderer.sprite == null)
+        {
+            Debug.LogError("No sprite at '" + item.SpritePath + "'.");
+        }
+    }
+
     public override void UnLoad()
     {
         gameObject.SetActive(false);
@@ -61,13 +72,9 @@ public class ItemPedestal : DungeonEntity
         Collider2D other = collision.collider;
         if (other.tag == "Player")
         {
-            Debug.Log("hej");
             PlayerController player = other.GetComponent<PlayerController>();
-
-            player.items.Add(item);
-            item.OnPickup(player);
-            item = null;
-            itemRenderer.enabled = false;
+            item.OnPickup(this, player);
+            UpdateSpriteRenderer();
         }
     }
 }

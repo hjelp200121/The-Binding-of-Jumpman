@@ -46,14 +46,16 @@ public static class ItemPools
         itemPools.Add(
             ItemPoolNames.TREASURE,
             new ItemPool(new Type[]{
-                typeof(TestTreasureItem)
+                //typeof(TestTreasureItem),
+                typeof(FasPolicyItem)
             })
         );
         /* Add the boss item pool. */
         itemPools.Add(
             ItemPoolNames.BOSS,
             new ItemPool(new Type[]{
-                typeof(TestBossItem)
+                //typeof(TestBossItem),
+                typeof(LibPolicyItem)
             })
         );
     }

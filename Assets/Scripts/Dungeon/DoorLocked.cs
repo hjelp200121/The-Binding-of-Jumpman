@@ -25,9 +25,10 @@ public class DoorLocked : Door
         {
             PlayerController player = other.GetComponent<PlayerController>();
             /* Take a key from the player, if they have one. */
-            if (player.keys > 0)
+            if (player.keyCount > 0)
             {
-                player.keys--;
+                player.keyCount--;
+                player.UpdateUI();
                 locked = false;
                 (connection as DoorLocked).locked = false;
                 room.UpdateCleared();
