@@ -392,6 +392,8 @@ MonoBehaviour:
   objects:
   - {fileID: 0}
   - {fileID: 3059500161815651211, guid: 64d6d3a6046fbcd649064c3d7ae1ad4e, type: 3}
+  - {fileID: 1106066675894160728, guid: 5ace1526bbc069234b9d266eb92a6de7, type: 3}
+  - {fileID: 6585875101786282267, guid: 48d7b781752bcce1191c9678d2c6df25, type: 3}
   roomNameInput: {fileID: 1265387074}
   doorGraphicPrefab: {fileID: 6017017859739203458, guid: 3a62ed7a2edd04702b724b167998af6f,
     type: 3}
@@ -2088,6 +2090,10 @@ MonoBehaviour:
     - m_Text: None
       m_Image: {fileID: 0}
     - m_Text: Enemy Spawner
+      m_Image: {fileID: 0}
+    - m_Text: Item Pedestal (Treasure)
+      m_Image: {fileID: 0}
+    - m_Text: Item Pedestal (Boss)
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

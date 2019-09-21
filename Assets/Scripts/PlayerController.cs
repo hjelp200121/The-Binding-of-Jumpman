@@ -24,6 +24,10 @@ public class PlayerController : DungeonEntity
     //public float knockback;
     public float speed;
     public float invincibilityOnDamage;
+
+    public ActiveItem activeItem;
+    public List<Item> items;
+    
     [HideInInspector]
     public float invincibilityTime;
     [HideInInspector]
@@ -44,6 +48,7 @@ public class PlayerController : DungeonEntity
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         blinkRoutine = Blink(0.2f);
+        items = new List<Item>();
     }
 
     // Update is called once per frame

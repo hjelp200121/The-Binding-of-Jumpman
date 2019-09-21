@@ -99,7 +99,7 @@ MonoBehaviour:
   room: {fileID: 0}
   rb: {fileID: 0}
   flying: 0
-  keys: 0
+  keys: 1
   projectilePrefab: {fileID: 2476050889695162712, guid: d8d6ba447ec56cd408df4ed3af55a624,
     type: 3}
   maxHealth: 6
