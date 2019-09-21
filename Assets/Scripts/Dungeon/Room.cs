@@ -14,6 +14,8 @@ public class Room : MonoBehaviour
     /* Four bits representing whether or not a door is allowed in that direction. */
     public int doorMask = 0;
     public RoomTypes type;
+
+    public SpriteRenderer[] wallDecorationsRenderers;
     /* The four colliders to use when no door is at the wall. */
     public Collider2D[] doorwayColliders;
     public Door[] doors;
@@ -37,6 +39,16 @@ public class Room : MonoBehaviour
 
     public void Load(PlayerController player)
     {
+        /* Apply random decorations. */
+        if (!discovered && wallDecorationsRenderers.Length > 0)
+        {
+            foreach (SpriteRenderer wallDec in wallDecorationsRenderers)
+            {
+                wallDec.flipX = Random.Range(0, 2) == 1;
+                wallDec.flipY = Random.Range(0, 2) == 1;
+            }
+        }
+
         gameObject.SetActive(true);
         this.player = player;
         contents.Load();
@@ -66,7 +78,8 @@ public class Room : MonoBehaviour
         }
         else
         {
-            if (!cleared) {
+            if (!cleared)
+            {
                 OnClear();
             }
             cleared = true;
@@ -81,7 +94,8 @@ public class Room : MonoBehaviour
         }
     }
 
-    void OnClear() {
+    void OnClear()
+    {
         player.OnRoomClear();
     }
 }

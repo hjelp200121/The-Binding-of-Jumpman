@@ -79,5 +79,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 5ed31606e2faf184d987420c31329c81,
         type: 3}
+    - target: {fileID: 5039056159703189633, guid: deb5c9973dfda494499dd888f397e13f,
+        type: 3}
+      propertyPath: wallDecorations.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039056159703189633, guid: deb5c9973dfda494499dd888f397e13f,
+        type: 3}
+      propertyPath: wallDecorationsRenderers.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039056159703189633, guid: deb5c9973dfda494499dd888f397e13f,
+        type: 3}
+      propertyPath: wallDecorationsRenderer
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178771625074509762, guid: deb5c9973dfda494499dd888f397e13f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5167046931349907539, guid: deb5c9973dfda494499dd888f397e13f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: deb5c9973dfda494499dd888f397e13f, type: 3}
