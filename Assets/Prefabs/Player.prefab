@@ -103,11 +103,14 @@ MonoBehaviour:
   bombCount: 1
   projectilePrefab: {fileID: 2476050889695162712, guid: d8d6ba447ec56cd408df4ed3af55a624,
     type: 3}
+  projectileUsed: {fileID: 0}
   healthPanel: {fileID: 0}
   keyText: {fileID: 0}
   bombText: {fileID: 0}
   activeItemImage: {fileID: 0}
   activeItemChargeBar: {fileID: 0}
+  itemNameText: {fileID: 0}
+  itemDescriptionText: {fileID: 0}
   maxHealth: 6
   health: 0
   damage: 3.5
@@ -144,6 +147,18 @@ MonoBehaviour:
   shieldTime: 0
   hasFasPolicy: 0
   temporaryDamage: 0
+  hasMorsKnife: 0
+  Knifeprefab: {fileID: 0}
+  hasThorn: 0
+  Thornprefab: {fileID: 0}
+  lawnPower: 0
+  tempSpeed: 0
+  tempAcceleration: 0
+  hasBensGrill: 0
+  Coalprefab: {fileID: 0}
+  BBQprefab: {fileID: 0}
+  hasFireFlower: 0
+  Fireprefab: {fileID: 0}
 --- !u!50 &3984815402720974282
 Rigidbody2D:
   serializedVersion: 4

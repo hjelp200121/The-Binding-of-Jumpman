@@ -21,6 +21,8 @@ public class PlayerController : DungeonEntity, IExplodable
     public Text keyText, bombText;
     public Image activeItemImage;
     public Slider activeItemChargeBar;
+    public Text itemNameText;
+    public Text itemDescriptionText;
 
     // Actual ingame stats
     public int maxHealth;
@@ -83,6 +85,8 @@ public class PlayerController : DungeonEntity, IExplodable
 
     IEnumerator blinkRoutine;
 
+    Item lastItem;
+
     // Start is called before the first frame update
     public override void Awake()
     {
@@ -91,17 +95,15 @@ public class PlayerController : DungeonEntity, IExplodable
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
         blinkRoutine = Blink(0.2f);
+
         items = new List<Item>();
         projectileUsed = projectilePrefab;
         tempSpeed = speed;
         tempAcceleration = acceleration;
 
-        healthPanel = GameObject.Find("Health Panel").GetComponent<RectTransform>();
-        keyText = GameObject.Find("Keys Text").GetComponent<Text>();
-        bombText = GameObject.Find("Bombs Text").GetComponent<Text>();
-        activeItemImage = GameObject.Find("Active Item Image").GetComponent<Image>();
-        activeItemChargeBar = GameObject.Find("Active Item Charge Bar").GetComponent<Slider>();
+        lastItem = null;
 
         UpdateUI();
 
@@ -573,11 +575,58 @@ public class PlayerController : DungeonEntity, IExplodable
         item.transform.position = transform.position;
         item.transform.localScale = Vector3.one;
         item.GetComponent<SpriteRenderer>().enabled = false;
+
+        Debug.Log("hej: " + item.itemName);
+        lastItem = item;
+        StopCoroutine("ShowItemInfo");
+        StartCoroutine("ShowItemInfo");
+
         UpdateUI();
     }
 
     public override void Load() { }
     public override void UnLoad() { }
+
+    public IEnumerator ShowItemInfo()
+    {
+        Debug.Log("------sa");
+        if (lastItem != null)
+        {
+            itemNameText.text = lastItem.itemName;
+            itemDescriptionText.text = lastItem.description;
+        }
+        float ft = 0;
+        Color c;
+        for (ft = 0; ft <= 1f; ft += 0.1f)
+        {
+            c = itemNameText.color;
+            c.a = ft;
+            itemNameText.color = c;
+            itemDescriptionText.color = c;
+            yield return null;
+        }
+        ft = 1;
+        c = itemNameText.color;
+        c.a = ft;
+        itemNameText.color = c;
+        itemDescriptionText.color = c;
+
+        yield return new WaitForSeconds(3f);
+
+        for (ft = 1; ft >= 0f; ft -= 0.1f)
+        {
+            c = itemNameText.color;
+            c.a = ft;
+            itemNameText.color = c;
+            itemDescriptionText.color = c;
+            yield return null;
+        }
+        ft = 0;
+        c = itemNameText.color;
+        c.a = ft;
+        itemNameText.color = c;
+        itemDescriptionText.color = c;
+    }
 
     public IEnumerator Blink(float blinkTime)
     {
