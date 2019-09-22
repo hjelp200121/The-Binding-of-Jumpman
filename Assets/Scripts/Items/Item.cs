@@ -33,6 +33,7 @@ public abstract class ActiveItem : Item
 public abstract class DiscreteActiveItem : ActiveItem
 {
     public int maxCharge;
+
     public int Charge { get; private set; }
 
     public override bool Use(PlayerController player)
@@ -50,7 +51,7 @@ public abstract class DiscreteActiveItem : ActiveItem
 
     public DiscreteActiveItem()
     {
-        this.Charge = 0;
+        this.Charge = maxCharge;
     }
 
     public void ChargeItem()
@@ -64,5 +65,10 @@ public abstract class DiscreteActiveItem : ActiveItem
         {
             Charge = maxCharge;
         }
+    }
+
+    public void Awake()
+    {
+        this.Charge = maxCharge;
     }
 }

@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 5039056159703189635, guid: deb5c9973dfda494499dd888f397e13f,
         type: 3}
       propertyPath: m_Name
-      value: Room-Start-0-000
+      value: Room-Common-0-000
       objectReference: {fileID: 0}
     - target: {fileID: 5039056159703189632, guid: deb5c9973dfda494499dd888f397e13f,
         type: 3}
@@ -67,15 +67,140 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5039056160082619100, guid: deb5c9973dfda494499dd888f397e13f,
+    - target: {fileID: 5039056159703189633, guid: deb5c9973dfda494499dd888f397e13f,
         type: 3}
-      propertyPath: m_Color.r
-      value: 0.6933962
+      propertyPath: contents.objects.Array.size
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5039056160082619100, guid: deb5c9973dfda494499dd888f397e13f,
+    - target: {fileID: 5039056159703189633, guid: deb5c9973dfda494499dd888f397e13f,
         type: 3}
-      propertyPath: m_Color.b
-      value: 0.71999466
+      propertyPath: contents.objects.Array.data[0]
+      value: 
+      objectReference: {fileID: 8460184199019796847}
+    - target: {fileID: 5039056159703189633, guid: deb5c9973dfda494499dd888f397e13f,
+        type: 3}
+      propertyPath: cleared
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: deb5c9973dfda494499dd888f397e13f, type: 3}
+--- !u!4 &8525502820696896647 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5039056159703189632, guid: deb5c9973dfda494499dd888f397e13f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3728691612589554695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8525502820696896646 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5039056159703189633, guid: deb5c9973dfda494499dd888f397e13f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3728691612589554695}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0512de29a46d414bb7500226a0c6317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &8804842370658145335
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8525502820696896647}
+    m_Modifications:
+    - target: {fileID: 3308139700665080850, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_Name
+      value: Item Pedestal Treasure
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544170596391741901, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544170596391741901, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544170596391741901, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544170596391741901, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544170596391741901, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544170596391741901, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544170596391741901, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544170596391741901, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544170596391741901, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544170596391741901, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544170596391741901, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106066675894160728, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106066675894160728, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: room
+      value: 
+      objectReference: {fileID: 8525502820696896646}
+    - target: {fileID: 1106066675894160728, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 2437749080424270342}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5ace1526bbc069234b9d266eb92a6de7, type: 3}
+--- !u!50 &2437749080424270342 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 6621851260211060273, guid: 5ace1526bbc069234b9d266eb92a6de7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8804842370658145335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8460184199019796847 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1106066675894160728, guid: 5ace1526bbc069234b9d266eb92a6de7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8804842370658145335}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5e652189675f42faa5c8e088e09f1a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

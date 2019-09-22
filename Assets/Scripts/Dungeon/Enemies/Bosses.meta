@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Dungeon/Enemies/Bosses.meta
 guid: c3a9a27e367212b46b1e11bb1d099aee
 folderAsset: yes
 DefaultImporter:
+=======
+guid: 80900a1c70f2f49469974f05b9230e67
+PrefabImporter:
+>>>>>>> 4a7d91eecb52566a23fb48b59b49b5b39ae77f84:Assets/Prefabs/Items/ButterscotchPie.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

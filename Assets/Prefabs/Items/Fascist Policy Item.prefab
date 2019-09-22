@@ -94,5 +94,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Fascist Policy
-  description: minkus
-  maxCharge: 1
+  description: Minkus
