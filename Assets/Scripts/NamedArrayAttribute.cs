@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
+#if UNITY_EDITOR
+using System;
 using UnityEditor;
+#endif
 
 // Defines an attribute that makes the array use enum values as labels.
 // Use like this:
@@ -13,6 +16,7 @@ public class NamedArrayAttribute : PropertyAttribute
     }
 }
 
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(NamedArrayAttribute))]
 public class NamedArrayDrawer : PropertyDrawer {
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
@@ -35,3 +39,4 @@ public class NamedArrayDrawer : PropertyDrawer {
         EditorGUI.PropertyField(position, property, label, property.isExpanded);
     }
 }
+#endif
