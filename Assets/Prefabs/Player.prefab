@@ -100,6 +100,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   flying: 0
   keyCount: 1
+  bombCount: 1
   projectilePrefab: {fileID: 2476050889695162712, guid: d8d6ba447ec56cd408df4ed3af55a624,
     type: 3}
   healthPanel: {fileID: 0}
@@ -114,7 +115,14 @@ MonoBehaviour:
   shotTimer: 1
   shotSpeed: 5
   accuracy: 0.1
-  speed: 10
+  speed: 5
+  acceleration: 20
+  bombPrefab: {fileID: 4489267182006379514, guid: fe451b137cb6a1c10af9a1f10f91eebd,
+    type: 3}
+  bombDamage: 15
+  bombRadius: 1.5
+  bombForce: 5
+  bombFuseTime: 2
   invincibilityOnDamage: 1
   healthImagePrefab: {fileID: 1735337244283639792, guid: 81688c4817e62b5a49d35a54de704516,
     type: 3}
@@ -122,6 +130,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ce31b9deee2c2fc42be3ac57c74e5cc7, type: 3}
   - {fileID: 21300000, guid: 8fafb1719fc847740a32f09aae9256f3, type: 3}
   - {fileID: 21300000, guid: 44056f475755184439132e25b29d5dd1, type: 3}
+  currentRoom: {fileID: 0}
   invincibilityTime: 0
   invincible: 0
 --- !u!50 &3984815402720974282
@@ -137,10 +146,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 4
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9923f77ae647b8346a5e5ce5ce2557bc, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -154,7 +163,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3984815402720974287}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9923f77ae647b8346a5e5ce5ce2557bc, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Door : MonoBehaviour, IExplodable
 {
     public SpriteRenderer spriteRenderer;
     public Sprite openSprite;
@@ -9,6 +9,7 @@ public class Door : MonoBehaviour
     public Collider2D closedCollider;
 
     public bool closed;
+    public bool broken = false;
 
     public Room room;
     public Door connection;
@@ -30,10 +31,19 @@ public class Door : MonoBehaviour
 
     public virtual void Close()
     {
-        closed = true;
-        spriteRenderer.sprite = closedSprite;
-        openCollider.enabled = false;
-        closedCollider.enabled = true;
+        if (!broken)
+        {
+            closed = true;
+            spriteRenderer.sprite = closedSprite;
+            openCollider.enabled = false;
+            closedCollider.enabled = true;
+        }
+    }
+
+    public virtual void BlowUp(DungeonObject source, float damage)
+    {
+        Open();
+        broken = true;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -43,9 +53,11 @@ public class Door : MonoBehaviour
             PlayerController player = other.GetComponent<PlayerController>();
             /* Move the player to the entrance of the other door. */
             player.transform.Translate(direction.ToVector() * 2f);
+            room.UnLoad();
             connection.room.Load(player);
             Camera.main.GetComponent<CameraController>().target = connection.room.transform;
-            room.UnLoad();
+
+            broken = false;
         }
     }
 }

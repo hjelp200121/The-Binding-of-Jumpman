@@ -51,6 +51,7 @@ public class Room : MonoBehaviour
 
         gameObject.SetActive(true);
         this.player = player;
+        player.currentRoom = this;
         contents.Load();
         UpdateCleared();
         discovered = true;
@@ -59,6 +60,10 @@ public class Room : MonoBehaviour
     public void UnLoad()
     {
         contents.UnLoad();
+        if (player != null)
+        {
+            player.currentRoom = null;
+        }
         this.player = null;
         gameObject.SetActive(false);
     }
@@ -92,6 +97,7 @@ public class Room : MonoBehaviour
             }
 
         }
+        Debug.Log(gameObject.name + " cleared updated: " + cleared);
     }
 
     void OnClear()

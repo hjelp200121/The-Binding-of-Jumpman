@@ -9,6 +9,7 @@ TagManager:
   - Room
   - Pickup
   - Enemy
+  - Rock
   layers:
   - Default
   - TransparentFX

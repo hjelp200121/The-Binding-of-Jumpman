@@ -15,6 +15,14 @@ public class DoorLocked : Door
         }
     }
 
+    public override void BlowUp(DungeonObject source, float damage)
+    {
+        if (!locked)
+        {
+            base.BlowUp(source, damage);
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (!locked) {

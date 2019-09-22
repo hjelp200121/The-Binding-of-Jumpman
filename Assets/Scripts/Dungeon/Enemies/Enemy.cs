@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public abstract class Enemy : DungeonEntity
+public abstract class Enemy : DungeonEntity, IExplodable
 {
     public float baseHealth;
     public float health;
@@ -22,6 +22,7 @@ public abstract class Enemy : DungeonEntity
         {
             alive = false;
             Delete();
+            room.UpdateCleared();
         }
     }
 
@@ -37,9 +38,13 @@ public abstract class Enemy : DungeonEntity
     public virtual void Delete()
     {
         room.contents.enemyCount--;
-        room.UpdateCleared();
         room.contents.objectRemoveQueue.Enqueue(this);
         Destroy(gameObject);
+    }
+
+    public void BlowUp(DungeonObject source, float damage)
+    {
+        TakeDamage(damage);
     }
 
     public override void Load()

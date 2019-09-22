@@ -6,9 +6,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
-public class PlayerController : DungeonEntity
+public class PlayerController : DungeonEntity, IExplodable
 {
-    public int keyCount = 0;
+    public int keyCount = 1, bombCount = 1;
     public Projectile projectilePrefab;
     private float lastFire;
     private bool lookShoot;
@@ -28,11 +28,17 @@ public class PlayerController : DungeonEntity
     public float accuracy;
     //public float knockback;
     public float speed;
+    public float acceleration;
+    public ActiveBomb bombPrefab;
+    public float bombDamage;
+    public float bombRadius;
+    public float bombForce;
+    public float bombFuseTime;
     public float invincibilityOnDamage;
 
     public Image healthImagePrefab;
     public Sprite[] healthSprites;
-
+    public Room currentRoom;
     public ActiveItem activeItem;
     public List<Item> items;
 
@@ -82,9 +88,23 @@ public class PlayerController : DungeonEntity
             StartCoroutine(blinkRoutine);
             invincible = true;
         }
-        if (Input.GetKey("space") && activeItem != null)
+        if (Input.GetKeyDown("space") && activeItem != null)
         {
             activeItem.Use(this);
+            UpdateUI();
+        }
+        if (Input.GetKeyDown("e") && bombCount > 0)
+        {
+            bombCount--;
+            ActiveBomb bomb = Instantiate<ActiveBomb>(bombPrefab);
+            bomb.explosionDamage = bombDamage;
+            bomb.explosionForce = bombForce;
+            bomb.explosionRadius = bombRadius;
+            bomb.fuseTime = bombFuseTime;
+            bomb.transform.position = transform.position;
+            currentRoom.contents.objects.Add(bomb);
+            bomb.room = currentRoom;
+            UpdateUI();
         }
         Shoot();
         Move();
@@ -97,8 +117,8 @@ public class PlayerController : DungeonEntity
 
     public void Move()
     {
-        float horizontal = Input.GetAxis("Horizontal") * speed;
-        float vertical = Input.GetAxis("Vertical") * speed;
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
         if (Input.GetKey("a") == true && Input.GetKey("d") == true)
         {
@@ -127,7 +147,24 @@ public class PlayerController : DungeonEntity
                 animator.SetInteger("LookDirection", 2);
             }
         }
-        rb.velocity = new Vector2(horizontal, vertical);
+        /* Calculate the acceleration. */
+        Vector2 velocityChange = new Vector2(horizontal, vertical);
+        /* No resin allowed */
+        if (velocityChange.sqrMagnitude > 1)
+        {
+            velocityChange = velocityChange.normalized;
+        }
+        velocityChange *= acceleration * Time.deltaTime;
+        /* Only apply speed if not already going too fast. */
+        if (rb.velocity.sqrMagnitude < speed*speed)
+        {
+            rb.velocity += velocityChange;
+            /* If the added velocity was too much, dial the speed back. */
+            if (rb.velocity.sqrMagnitude > speed*speed)
+            {
+                rb.velocity = rb.velocity.normalized * speed;
+            }
+        }
     }
 
     public void UpdateUI()
@@ -184,7 +221,7 @@ public class PlayerController : DungeonEntity
         /* Update bombs. */
         if (bombText != null)
         {
-            // ...
+            bombText.text = bombCount.ToString("00");
         }
         /* Update active item. */
         if (activeItemImage != null && activeItemChargeBar != null)
@@ -304,6 +341,14 @@ public class PlayerController : DungeonEntity
             health = maxHealth;
         }
         UpdateUI();
+    }
+
+    public void BlowUp(DungeonObject source, float damage)
+    {
+        if (damage > 0f)
+        {
+            TakeDamage(2, source);
+        }
     }
 
     public void OnRoomClear()

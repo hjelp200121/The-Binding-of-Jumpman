@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2367512662182949466}
   - component: {fileID: 2367512662182949477}
-  - component: {fileID: 2367512662182949476}
   - component: {fileID: 2367512662182949467}
+  - component: {fileID: 6885904427766250909}
   m_Layer: 13
-  m_Name: Key
+  m_Name: Key Pickup
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,8 +82,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2367512662182949476
-BoxCollider2D:
+--- !u!114 &2367512662182949467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2367512662182949479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 317cb3de2c65c2841abfa887074e6fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  room: {fileID: 0}
+  rb: {fileID: 0}
+  flying: 0
+--- !u!60 &6885904427766250909
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,21 +120,14 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.51724136, y: 0.51724136}
-  m_EdgeRadius: 0
---- !u!114 &2367512662182949467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2367512662182949479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 317cb3de2c65c2841abfa887074e6fd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  room: {fileID: 0}
-  rb: {fileID: 0}
-  flying: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.0894506, y: 0.2237668}
+      - {x: -0.14789534, y: 0.16532218}
+      - {x: -0.1522522, y: 0.053902388}
+      - {x: -0.06623936, y: -0.01696837}
+      - {x: -0.054596663, y: -0.21941018}
+      - {x: 0.024470568, y: -0.21723187}
+      - {x: 0.023829937, y: -0.021288991}
+      - {x: 0.11123419, y: 0.14799058}
+      - {x: 0.052418232, y: 0.22812355}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class Rock : DungeonTile
+public class Rock : DungeonTile, IExplodable
 {
     public Sprite[] sprites;
     SpriteRenderer spriteRenderer;
@@ -14,6 +14,13 @@ public class Rock : DungeonTile
         Sprite randSprite = sprites[Random.Range(0, sprites.Length)];
         spriteRenderer.sprite = randSprite;
     }
+
+    public void BlowUp(DungeonObject source, float damage)
+    {
+        room.contents.SetTile(null, x, y);
+        Destroy(gameObject);
+    }
+
     public override void Load()
     {
         gameObject.SetActive(true);
