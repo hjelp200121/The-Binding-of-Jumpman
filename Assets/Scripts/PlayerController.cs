@@ -55,6 +55,10 @@ public class PlayerController : DungeonEntity, IExplodable
 
     public bool hasHeartLocket = false;
     public bool heartLocketActive = false;
+    public bool hasLibPolicy = false;
+    public float shieldTime = 0;
+    public bool hasFasPolicy = false;
+    public float temporaryDamage;
 
     // Initializations for different stuff
     SpriteRenderer spriteRenderer;
@@ -85,7 +89,7 @@ public class PlayerController : DungeonEntity, IExplodable
     // Update is called once per frame
     void Update()
     {
-        if ((invincibilityTime -= Time.deltaTime) < 0f)
+        if ((invincibilityTime -= Time.deltaTime) < 0f && shieldTime < 0)
         {
             invincible = false;
             invincibilityTime = 0f;
@@ -106,6 +110,12 @@ public class PlayerController : DungeonEntity, IExplodable
         {
             lastFire = Time.time;
             Shoot();
+        }
+
+        shieldTime -= Time.deltaTime;
+        if (shieldTime == 0)
+        {
+            invincible = false;
         }
     }
 
@@ -239,12 +249,22 @@ public class PlayerController : DungeonEntity, IExplodable
         projectile.rb.velocity = projectileVel;
 
         projectile.timer = shotTimer;
-        projectile.damage = damage;
+        if (hasFasPolicy)
+        {
+            projectile.damage = temporaryDamage;
+        } else
+        {
+            projectile.damage = damage;
+        }
         projectile.fromPlayer = true;
         projectile.sender = this;
 
         projectile.room = currentRoom;
         currentRoom.contents.objectAddQueue.Enqueue(projectile);
+        if (hasFasPolicy)
+        {
+            temporaryDamage *= 1.01f;
+        }
     }
 
     public void PlaceBomb()
@@ -368,6 +388,11 @@ public class PlayerController : DungeonEntity, IExplodable
             Die(source);
         }
         invincibilityTime += invincibilityOnDamage;
+        if (hasLibPolicy && health == 1)
+        {
+            invincible = true;
+            shieldTime = 5;
+        }
         UpdateUI();
     }
 
@@ -391,6 +416,7 @@ public class PlayerController : DungeonEntity, IExplodable
     public override void OnRoomBeaten()
     {
         heartLocketActive = true;
+        temporaryDamage = damage;
         if (activeItem is DiscreteActiveItem)
         {
             (activeItem as DiscreteActiveItem).ChargeItem();

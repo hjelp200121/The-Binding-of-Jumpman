@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SanessBone : PassiveItem
+public class LegendaryHero : PassiveItem
 {
     public override void OnPickup(ItemPedestal pedestal, PlayerController player)
     {
         base.OnPickup(pedestal, player);
-        //Lav epic bone foran spilleren
+        player.maxHealth += 2;
+        player.health += 2;
+        player.damage *= 1.25f;
     }
 }
