@@ -108,7 +108,7 @@ MonoBehaviour:
   bombText: {fileID: 0}
   activeItemImage: {fileID: 0}
   activeItemChargeBar: {fileID: 0}
-  maxHealth: 8
+  maxHealth: 6
   health: 0
   damage: 3.5
   fireDelay: 0.5
@@ -140,6 +140,10 @@ MonoBehaviour:
   lookDirection: 0
   hasHeartLocket: 0
   heartLocketActive: 0
+  hasLibPolicy: 0
+  shieldTime: 0
+  hasFasPolicy: 0
+  temporaryDamage: 0
 --- !u!50 &3984815402720974282
 Rigidbody2D:
   serializedVersion: 4

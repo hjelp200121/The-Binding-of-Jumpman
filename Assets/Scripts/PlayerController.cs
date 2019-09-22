@@ -10,6 +10,8 @@ public class PlayerController : DungeonEntity, IExplodable
 {
     public int keyCount = 1, bombCount = 1;
     public Projectile projectilePrefab;
+    public Projectile projectileUsed;
+    private int shottype;
     private float lastFire;
 
     public RectTransform healthPanel;
@@ -58,7 +60,12 @@ public class PlayerController : DungeonEntity, IExplodable
     public bool hasLibPolicy = false;
     public float shieldTime = 0;
     public bool hasFasPolicy = false;
-    public float temporaryDamage;
+    public float temporaryDamage = 3.5f;
+    public bool hasMorsKnife = false;
+    public Projectile Knifeprefab;
+    public bool hasThorn = false;
+    public Projectile Thornprefab;
+    public bool activateLawnmower = false;
 
     // Initializations for different stuff
     SpriteRenderer spriteRenderer;
@@ -76,6 +83,7 @@ public class PlayerController : DungeonEntity, IExplodable
         animator = GetComponent<Animator>();
         blinkRoutine = Blink(0.2f);
         items = new List<Item>();
+        projectileUsed = projectilePrefab;
 
         healthPanel = GameObject.Find("Health Panel").GetComponent<RectTransform>();
         keyText = GameObject.Find("Keys Text").GetComponent<Text>();
@@ -246,7 +254,25 @@ public class PlayerController : DungeonEntity, IExplodable
         {
             return;
         }
-        Projectile projectile = Instantiate<Projectile>(projectilePrefab, transform.position, transform.rotation);
+        shottype = Random.Range(0, 101);
+        if (hasMorsKnife)
+        {
+            if (shottype < 20)
+            {
+                projectileUsed = Knifeprefab;
+
+            } else {
+                projectileUsed = projectilePrefab;
+            }
+        }
+        if (hasThorn) {
+            if (shottype > 20 && shottype < 50) {
+                projectileUsed = Thornprefab;
+            } else if (shottype > 50) {
+                projectileUsed = projectilePrefab;
+            }
+        }
+        Projectile projectile = Instantiate<Projectile>(projectileUsed, transform.position, transform.rotation);
 
         Vector2 projectileVel = lookDirection.ToVector() * shotSpeed;
         projectileVel += rb.velocity * 0.5f;
@@ -262,6 +288,15 @@ public class PlayerController : DungeonEntity, IExplodable
         {
             projectile.damage = damage;
         }
+
+        if (projectileUsed == Knifeprefab) {
+            projectile.damage += damage * 2;
+        } else if (projectileUsed == Thornprefab)
+        {
+            projectile.damage += damage / 2;
+            projectile.timer += shotTimer / 2;
+        }
+
         projectile.fromPlayer = true;
         projectile.sender = this;
 
