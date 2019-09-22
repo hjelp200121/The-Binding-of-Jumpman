@@ -1006,6 +1006,11 @@ PrefabInstance:
       propertyPath: y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 691548887449941143, guid: 9698500fde89c1dd39f837ed3e528354,
+        type: 3}
+      propertyPath: nextScene
+      value: Void
+      objectReference: {fileID: 0}
     - target: {fileID: 691548887449941136, guid: 9698500fde89c1dd39f837ed3e528354,
         type: 3}
       propertyPath: m_Enabled

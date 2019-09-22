@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/TheGarden.unity
     guid: d491b60353e7be811bdf36c2690f803d
   - enabled: 1
-    path: Assets/Scenes/void.unity
+    path: Assets/Scenes/TheKitchen.unity
+    guid: 00a843e44ea507678ba57fda6531421a
+  - enabled: 1
+    path: Assets/Scenes/TheWorkshop.unity
+    guid: f4a7c5753a472115ab505c12b04c92c8
+  - enabled: 1
+    path: Assets/Scenes/Void.unity
     guid: e3a70c1d5f2bc6fa3bfd63b78db7cca8
   m_configObjects: {}

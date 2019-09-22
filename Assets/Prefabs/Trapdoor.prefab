@@ -97,7 +97,7 @@ MonoBehaviour:
   room: {fileID: 0}
   x: 0
   y: 0
-  nextScene: void
+  nextScene: Void
   openCollider: {fileID: 691548887449941136}
   openSprite: {fileID: 21300000, guid: db288c68409ccf145a7f65f872a8936b, type: 3}
   closedSprite: {fileID: 21300000, guid: d28658b4ada247d4eb4a5134a3fc7578, type: 3}

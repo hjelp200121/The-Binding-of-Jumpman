@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 3146639255198548531, guid: 00c2885615e0e6c4ea03293af06fc6da,
         type: 3}
       propertyPath: m_Name
-      value: Room-Common-1-000
+      value: Room-Start-1-000
       objectReference: {fileID: 0}
     - target: {fileID: 3146639255198548528, guid: 00c2885615e0e6c4ea03293af06fc6da,
         type: 3}
