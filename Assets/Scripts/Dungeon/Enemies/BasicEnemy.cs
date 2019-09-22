@@ -18,7 +18,7 @@ public class BasicEnemy : Enemy
         Collider2D other = collision.collider;
         if (other.tag == "Player") {
             if (player.lawnPower) {
-                health -= 10;
+                TakeDamage(5);
             } else {
                 PlayerController player = other.GetComponent<PlayerController>();
                 player.TakeDamage(this);
