@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2877843344453198460
+--- !u!1 &2206085147820437078
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4448015286987171245}
-  - component: {fileID: 7389405266987136863}
-  - component: {fileID: 7046611944614265955}
+  - component: {fileID: 3599953242609666888}
+  - component: {fileID: 7753620925958819485}
+  - component: {fileID: 5473026420847022901}
   m_Layer: 0
-  m_Name: TheStick
+  m_Name: WornDagger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4448015286987171245
+--- !u!4 &3599953242609666888
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877843344453198460}
+  m_GameObject: {fileID: 2206085147820437078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,13 +32,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7389405266987136863
+--- !u!212 &7753620925958819485
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877843344453198460}
+  m_GameObject: {fileID: 2206085147820437078}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d4a5d73eeaf07b14b918d1428db64eb7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b7e5120c0896ddf4b8ca6ba4afd2685f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -81,18 +81,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7046611944614265955
+--- !u!114 &5473026420847022901
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877843344453198460}
+  m_GameObject: {fileID: 2206085147820437078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b49f3c5099765e3428426c94f3c53bf9, type: 3}
+  m_Script: {fileID: 11500000, guid: 438cd5c231d8be94796422830721ad71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: The Stick
-  description: 'Its bark is worse than its bite '
-  maxCharge: 1
+  itemName: Worn Dagger
+  description: Perfect for cutting plants and vines

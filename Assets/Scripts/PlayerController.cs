@@ -53,6 +53,9 @@ public class PlayerController : DungeonEntity, IExplodable
 
     bool shooting = false;
 
+    public bool hasHeartLocket = false;
+    public bool heartLocketActive = false;
+
     // Initializations for different stuff
     SpriteRenderer spriteRenderer;
     Animator animator;
@@ -104,6 +107,8 @@ public class PlayerController : DungeonEntity, IExplodable
             lastFire = Time.time;
             Shoot();
         }
+
+        Debug.Log(heartLocketActive);
     }
 
     public void Die(DungeonObject source)
@@ -353,6 +358,12 @@ public class PlayerController : DungeonEntity, IExplodable
         {
             return;
         }
+        if (heartLocketActive)
+        {
+            heartLocketActive = false;
+            invincibilityTime += invincibilityOnDamage*2;
+            return;
+        }
         if ((health -= amount) <= 0)
         {
             health = 0;
@@ -381,6 +392,7 @@ public class PlayerController : DungeonEntity, IExplodable
 
     public override void OnRoomBeaten()
     {
+        heartLocketActive = true;
         if (activeItem is DiscreteActiveItem)
         {
             (activeItem as DiscreteActiveItem).ChargeItem();
