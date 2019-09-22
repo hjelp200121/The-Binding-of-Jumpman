@@ -71,7 +71,7 @@ public class PlayerController : DungeonEntity, IExplodable
     public bool hasBensGrill = false;
     public Projectile Coalprefab;
     public Projectile BBQprefab;
-    public bool hasFireFlower = true;
+    public bool hasFireFlower = false;
     public Projectile Fireprefab;
 
     // Initializations for different stuff
