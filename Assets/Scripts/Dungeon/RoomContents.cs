@@ -57,6 +57,11 @@ public class RoomContents
             }
         }
 
+        while (objectRemoveQueue.Count > 0)
+        {
+            DungeonObject removeObject = objectRemoveQueue.Dequeue();
+            objects.Remove(removeObject);
+        }
         while (objectAddQueue.Count > 0)
         {
             DungeonObject addObject = objectAddQueue.Dequeue();
@@ -91,7 +96,11 @@ public class RoomContents
             }
         }
 
-
+        while (objectAddQueue.Count > 0)
+        {
+            DungeonObject addObject = objectAddQueue.Dequeue();
+            objects.Add(addObject);
+        }
         while (objectRemoveQueue.Count > 0)
         {
             DungeonObject removeObject = objectRemoveQueue.Dequeue();

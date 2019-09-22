@@ -11,7 +11,6 @@ public class PlayerController : DungeonEntity, IExplodable
     public int keyCount = 1, bombCount = 1;
     public Projectile projectilePrefab;
     private float lastFire;
-    private bool lookShoot;
 
     public RectTransform healthPanel;
     public Text keyText, bombText;
@@ -29,6 +28,7 @@ public class PlayerController : DungeonEntity, IExplodable
     //public float knockback;
     public float speed;
     public float acceleration;
+    public float friction;
     public ActiveBomb bombPrefab;
     public float bombDamage;
     public float bombRadius;
@@ -46,6 +46,12 @@ public class PlayerController : DungeonEntity, IExplodable
     public float invincibilityTime;
     [HideInInspector]
     public bool invincible = false;
+    [HideInInspector]
+    public Vector2 moveDirection;
+    [HideInInspector]
+    public Directions lookDirection;
+
+    bool shooting = false;
 
     // Initializations for different stuff
     SpriteRenderer spriteRenderer;
@@ -88,26 +94,16 @@ public class PlayerController : DungeonEntity, IExplodable
             StartCoroutine(blinkRoutine);
             invincible = true;
         }
-        if (Input.GetKeyDown("space") && activeItem != null)
-        {
-            activeItem.Use(this);
-            UpdateUI();
-        }
-        if (Input.GetKeyDown("e") && bombCount > 0)
-        {
-            bombCount--;
-            ActiveBomb bomb = Instantiate<ActiveBomb>(bombPrefab);
-            bomb.explosionDamage = bombDamage;
-            bomb.explosionForce = bombForce;
-            bomb.explosionRadius = bombRadius;
-            bomb.fuseTime = bombFuseTime;
-            bomb.transform.position = transform.position;
-            currentRoom.contents.objects.Add(bomb);
-            bomb.room = currentRoom;
-            UpdateUI();
-        }
-        Shoot();
+
+        HandleInput();
+        UpdateDirection();
         Move();
+
+        if (shooting && Time.time > lastFire + fireDelay)
+        {
+            lastFire = Time.time;
+            Shoot();
+        }
     }
 
     public void Die(DungeonObject source)
@@ -115,56 +111,149 @@ public class PlayerController : DungeonEntity, IExplodable
         Debug.Log("Player was killed by " + source.name + ".");
     }
 
-    public void Move()
+    public void HandleInput()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        /* Default look direction. */
+        lookDirection = Directions.SOUTH;
 
+        /* Movement. */
+        moveDirection.x = Input.GetAxisRaw("Horizontal");
+        moveDirection.y = Input.GetAxisRaw("Vertical");
         if (Input.GetKey("a") == true && Input.GetKey("d") == true)
         {
-            horizontal = 0;
+            moveDirection.x = 0;
         }
         if (Input.GetKey("w") == true && Input.GetKey("s") == true)
         {
-            vertical = 0;
+            moveDirection.y = 0;
         }
-        if (lookShoot == false)
+        /* Update the `lookDirection` to match the movement. */
+        if (moveDirection.x > 0)
         {
-            if (Input.GetKey("a"))
-            {
-                animator.SetInteger("LookDirection", 3);
-            }
-            else if (Input.GetKey("d"))
-            {
-                animator.SetInteger("LookDirection", 1);
-            }
-            else if (Input.GetKey("w"))
-            {
-                animator.SetInteger("LookDirection", 0);
-            }
-            else
-            {
-                animator.SetInteger("LookDirection", 2);
-            }
+            lookDirection = Directions.EAST;
         }
+        else if (moveDirection.x < 0)
+        {
+            lookDirection = Directions.WEST;
+        }
+        else if (moveDirection.y > 0)
+        {
+            lookDirection = Directions.NORTH;
+        }
+
+        /* Shooting. */
+        if (Input.GetKey("left"))
+        {
+            lookDirection = Directions.WEST;
+            shooting = true;
+        }
+        else if (Input.GetKey("right"))
+        {
+            lookDirection = Directions.EAST;
+            shooting = true;
+        }
+        else if (Input.GetKey("up"))
+        {
+            lookDirection = Directions.NORTH;
+            shooting = true;
+        }
+        else if (Input.GetKey("down"))
+        {
+            lookDirection = Directions.SOUTH;
+            shooting = true;
+        }
+        else
+        {
+            shooting = false;
+        }
+
+
+        /* Active item usage. */
+        if (Input.GetKeyDown("space") && activeItem != null)
+        {
+            activeItem.Use(this);
+            UpdateUI();
+        }
+
+        /* Bomb placement. */
+        if (Input.GetKeyDown("e") && bombCount > 0)
+        {
+            bombCount--;
+            PlaceBomb();
+            UpdateUI();
+        }
+    }
+
+    public void UpdateDirection()
+    {
+        if (lookDirection == Directions.NORTH)
+        {
+            animator.SetInteger("LookDirection", 0);
+        }
+        else if (lookDirection == Directions.EAST)
+        {
+            animator.SetInteger("LookDirection", 1);
+        }
+        else if (lookDirection == Directions.SOUTH)
+        {
+            animator.SetInteger("LookDirection", 2);
+        }
+        else
+        {
+            animator.SetInteger("LookDirection", 3);
+        }
+    }
+
+    public void Move()
+    {
         /* Calculate the acceleration. */
-        Vector2 velocityChange = new Vector2(horizontal, vertical);
-        /* No resin allowed */
-        if (velocityChange.sqrMagnitude > 1)
+        Vector2 velocityChange = moveDirection;
+        if (velocityChange == Vector2.zero)
         {
-            velocityChange = velocityChange.normalized;
+            rb.velocity -= rb.velocity * friction * Time.deltaTime;
         }
-        velocityChange *= acceleration * Time.deltaTime;
-        /* Only apply speed if not already going too fast. */
-        if (rb.velocity.sqrMagnitude < speed*speed)
+        else
         {
-            rb.velocity += velocityChange;
-            /* If the added velocity was too much, dial the speed back. */
-            if (rb.velocity.sqrMagnitude > speed*speed)
+            /* No resin allowed */
+            velocityChange = velocityChange.normalized;
+            velocityChange *= acceleration * Time.deltaTime;
+            /* Only apply speed if not already going too fast. */
+            if ((rb.velocity + velocityChange).sqrMagnitude < speed * speed)
             {
-                rb.velocity = rb.velocity.normalized * speed;
+                rb.velocity += velocityChange;
             }
         }
+    }
+
+    public void Shoot()
+    {
+        Projectile projectile = Instantiate<Projectile>(projectilePrefab, transform.position, transform.rotation);
+
+        Vector2 projectileVel = lookDirection.ToVector() * shotSpeed;
+        projectileVel += rb.velocity * 0.5f;
+        projectileVel.x += Random.Range(-accuracy, accuracy);
+        projectileVel.y += Random.Range(-accuracy, accuracy);
+        projectile.rb.velocity = projectileVel;
+
+        projectile.timer = shotTimer;
+        projectile.damage = damage;
+        projectile.fromPlayer = true;
+        projectile.sender = this;
+
+        projectile.room = currentRoom;
+        currentRoom.contents.objectAddQueue.Enqueue(projectile);
+    }
+
+    public void PlaceBomb()
+    {
+        ActiveBomb bomb = Instantiate<ActiveBomb>(bombPrefab);
+        bomb.explosionDamage = bombDamage;
+        bomb.explosionForce = bombForce;
+        bomb.explosionRadius = bombRadius;
+        bomb.fuseTime = bombFuseTime;
+        bomb.transform.position = transform.position;
+        currentRoom.contents.objects.Add(bomb);
+        bomb.room = currentRoom;
     }
 
     public void UpdateUI()
@@ -252,63 +341,6 @@ public class PlayerController : DungeonEntity, IExplodable
         }
     }
 
-    public void Shoot()
-    {
-        /* Johan ændrer denne her method den er dum.
-         * Shoot burde skyde, ikke andet.
-         * Lav en anden method der tjekker om man kan skyde / om spilleren vil skyde.
-         * Og så brug `Directions` enumeratoren, den gør ting nemmerer. */
-        float shootHorizontal = 0;
-        float shootVertical = 0;
-        if (Input.GetKey("left") && Time.time > lastFire + fireDelay)
-        {
-            shootHorizontal = -1;
-            animator.SetInteger("LookDirection", 3);
-            lookShoot = true;
-        }
-        else if (Input.GetKey("right") && Time.time > lastFire + fireDelay)
-        {
-            shootHorizontal = 1;
-            animator.SetInteger("LookDirection", 1);
-            lookShoot = true;
-        }
-        else if (Input.GetKey("up") && Time.time > lastFire + fireDelay)
-        {
-            shootVertical = 1;
-            animator.SetInteger("LookDirection", 0);
-            lookShoot = true;
-        }
-        else if (Input.GetKey("down") && Time.time > lastFire + fireDelay)
-        {
-            shootVertical = -1;
-            animator.SetInteger("LookDirection", 2);
-            lookShoot = true;
-        }
-        else if (Time.time > lastFire + fireDelay)
-        {
-            lookShoot = false;
-        }
-
-        if (shootHorizontal != 0 || shootVertical != 0)
-        {
-            lastFire = Time.time;
-            Projectile projectile = Instantiate<Projectile>(projectilePrefab, transform.position, transform.rotation);
-            if (shootHorizontal != 0)
-            {
-                projectile.GetComponent<Rigidbody2D>().velocity =
-                    new Vector2(shootHorizontal * shotSpeed, shootVertical * shotSpeed + Random.Range(-accuracy, accuracy) * shotSpeed);
-            }
-            else
-            {
-                projectile.GetComponent<Rigidbody2D>().velocity =
-                    new Vector2(shootHorizontal * shotSpeed + Random.Range(-accuracy, accuracy) * shotSpeed, shootVertical * shotSpeed);
-            }
-            projectile.timer = shotTimer;
-            projectile.damage = damage;
-            projectile.fromPlayer = true;
-            projectile.sender = this;
-        }
-    }
 
     public void TakeDamage(DungeonObject source)
     {

@@ -10,6 +10,7 @@ TagManager:
   - Pickup
   - Enemy
   - Rock
+  - Active Bomb
   layers:
   - Default
   - TransparentFX

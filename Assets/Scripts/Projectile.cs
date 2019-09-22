@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : DungeonEntity
 {
     public float damage;
 
@@ -13,19 +13,42 @@ public class Projectile : MonoBehaviour
     [HideInInspector]
     public DungeonObject sender;
 
-    // Start is called before the first frame update
-    void Start()
+    bool deleted;
+
+    public override void Awake()
     {
+        base.Awake();
+        deleted = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0)
+        if (!deleted)
         {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                Delete();
+            }
+
+        }
+    }
+
+    public virtual void Delete()
+    {
+        if (!deleted)
+        {
+            deleted = true;
+            room.contents.objectRemoveQueue.Enqueue(this);
             Destroy(gameObject);
         }
+    }
+
+    public override void Load() { }
+    public override void UnLoad()
+    {
+        Delete();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -36,7 +59,7 @@ public class Projectile : MonoBehaviour
             {
                 Enemy enemy = other.GetComponent<Enemy>();
                 enemy.TakeDamage(damage);
-                Destroy(gameObject);
+                Delete();
             }
         }
         else if (other.tag == "Player")
@@ -45,14 +68,19 @@ public class Projectile : MonoBehaviour
             {
                 PlayerController player = other.GetComponent<PlayerController>();
                 player.TakeDamage(sender);
-                Destroy(gameObject);
+                Delete();
             }
+        }
+        else if (other.tag == "Active Bomb")
+        {
+            other.GetComponent<Rigidbody2D>().AddForce(rb.velocity * 0.2f, ForceMode2D.Impulse);
+            Delete();
         }
         else
         {
             if (!other.isTrigger)
             {
-                Destroy(gameObject);
+                Delete();
             }
         }
     }
