@@ -25,8 +25,14 @@ public class Door : MonoBehaviour, IExplodable
     {
         closed = false;
         spriteRenderer.sprite = openSprite;
-        openCollider.enabled = true;
-        closedCollider.enabled = false;
+        if (openCollider != null)
+        {
+            openCollider.enabled = true;
+        }
+        if (closedCollider != null)
+        {
+            closedCollider.enabled = false;
+        }
     }
 
     public virtual void Close()
@@ -35,8 +41,14 @@ public class Door : MonoBehaviour, IExplodable
         {
             closed = true;
             spriteRenderer.sprite = closedSprite;
-            openCollider.enabled = false;
-            closedCollider.enabled = true;
+            if (openCollider != null)
+            {
+                openCollider.enabled = false;
+            }
+            if (closedCollider != null)
+            {
+                closedCollider.enabled = true;
+            }
         }
     }
 
@@ -46,7 +58,7 @@ public class Door : MonoBehaviour, IExplodable
         broken = true;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {

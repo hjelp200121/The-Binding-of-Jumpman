@@ -23,6 +23,7 @@ public class ItemPools : MonoBehaviour
             return;
         }
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 }
 

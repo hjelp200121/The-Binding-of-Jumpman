@@ -7,11 +7,11 @@ public class DungeonGenerator : MonoBehaviour
 {
     /* The root-object of the dungeon. */
     public Dungeon dungeon;
+    public BranchInfo[] branchingInfo;
     [NamedArray(typeof(RoomTypes))]
     public RoomCollection[] roomPrefabs;
     [NamedArray(typeof(RoomTypes))]
     public Door[] doorPrefabs;
-    public int branchLength;
 
     /* Generate the dungeon. */
     void Awake()
@@ -29,15 +29,17 @@ public class DungeonGenerator : MonoBehaviour
         rooms.Add(new RoomInfo(0, 0, RoomTypes.START));
 
         /* Generate the different branches of the dungeon. */
-        RoomTypes[] branchGoals = { RoomTypes.COMMON, RoomTypes.TREASURE, RoomTypes.BOSS };
-        for (int i = 0; i < branchGoals.Length; i++)
+        for (int i = 0; i < branchingInfo.Length; i++)
         {
+            BranchInfo branchInfo = branchingInfo[i];
+            int branchLength = Random.Range(branchInfo.minLength, branchInfo.maxLength+1);
+            RoomTypes goal = branchInfo.goal;
             List<Vector2> occupied = GetOccupiedCoordinates(rooms);
             /* Choose a random room to branch off. */
             RoomInfo startRoom = rooms[Random.Range(0, rooms.Count)];
             List<RoomInfo> branch = DungeonBranch.GenerateBranch(
                 new Vector2(startRoom.x, startRoom.y),
-                branchLength, branchGoals[i], occupied);
+                branchLength, goal, occupied);
 
             /* If the branch generation failed, try again. */
             if (branch == null)
@@ -101,8 +103,9 @@ public class DungeonGenerator : MonoBehaviour
             d++
         )
         {
-            if (roomInfo.neighbors[(int)d] != null) {
-                doorMask += 1 << (int) d;
+            if (roomInfo.neighbors[(int)d] != null)
+            {
+                doorMask += 1 << (int)d;
             }
         }
 
@@ -339,6 +342,14 @@ static class DungeonBranch
 
         return rooms;
     }
+}
+
+[System.Serializable]
+public struct BranchInfo
+{
+    public int minLength;
+    public int maxLength;
+    public RoomTypes goal;
 }
 
 public class RoomInfo

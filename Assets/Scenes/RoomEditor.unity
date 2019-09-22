@@ -389,6 +389,7 @@ MonoBehaviour:
   tiles:
   - {fileID: 0}
   - {fileID: 2024161861180009623, guid: 97594b3ea76558da6970ce7de38f8ab5, type: 3}
+  - {fileID: 691548887449941143, guid: 9698500fde89c1dd39f837ed3e528354, type: 3}
   objects:
   - {fileID: 0}
   - {fileID: 3059500161815651211, guid: 64d6d3a6046fbcd649064c3d7ae1ad4e, type: 3}
@@ -892,6 +893,8 @@ MonoBehaviour:
     - m_Text: None
       m_Image: {fileID: 0}
     - m_Text: Rocks
+      m_Image: {fileID: 21300000, guid: 80460e0d7256818c1a2a3abb467189d3, type: 3}
+    - m_Text: Trapdoor
       m_Image: {fileID: 21300000, guid: 80460e0d7256818c1a2a3abb467189d3, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:

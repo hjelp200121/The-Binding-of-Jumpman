@@ -84,6 +84,8 @@ public class PlayerController : DungeonEntity, IExplodable
         activeItemChargeBar = GameObject.Find("Active Item Charge Bar").GetComponent<Slider>();
 
         UpdateUI();
+
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
