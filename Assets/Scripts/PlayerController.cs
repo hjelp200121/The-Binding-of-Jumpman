@@ -545,7 +545,9 @@ public class PlayerController : DungeonEntity, IExplodable
 
     public override void OnRoomBeaten()
     {
-        heartLocketActive = true;
+        if(hasHeartLocket) {
+            heartLocketActive = true;
+        }
         temporaryDamage = damage;
         if (activeItem is DiscreteActiveItem)
         {
