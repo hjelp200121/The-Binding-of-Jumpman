@@ -6,7 +6,7 @@ public class ItemPedestal : DungeonEntity
 {
     public ItemPoolNames poolNames;
     public Transform itemParent;
-    private ItemPool pool;
+    public ItemPool pool;
     public Item item;
 
     private bool loadedBefore;

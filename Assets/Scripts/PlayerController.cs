@@ -107,8 +107,6 @@ public class PlayerController : DungeonEntity, IExplodable
             lastFire = Time.time;
             Shoot();
         }
-
-        Debug.Log(heartLocketActive);
     }
 
     public void Die(DungeonObject source)
