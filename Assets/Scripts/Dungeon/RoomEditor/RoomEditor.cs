@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class RoomEditor : MonoBehaviour
 {
+#if UNITY_EDITOR
     public enum DungeonObjectType
     {
         TILE, OBJECT
@@ -327,4 +328,5 @@ public class RoomEditor : MonoBehaviour
             }
         }
     }
+#endif
 }
