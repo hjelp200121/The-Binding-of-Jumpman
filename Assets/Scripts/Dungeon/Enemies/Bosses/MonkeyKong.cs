@@ -162,8 +162,15 @@ public class MonkeyKong : Boss
         {
             if (other.tag == "Player")
             {
-                PlayerController player = other.GetComponent<PlayerController>();
-                player.TakeDamage(this);
+                if (player.lawnPower)
+                {
+                    TakeDamage(2);
+                }
+                else
+                {
+                    PlayerController player = other.GetComponent<PlayerController>();
+                    player.TakeDamage(this);
+                }
             }
         }
     }

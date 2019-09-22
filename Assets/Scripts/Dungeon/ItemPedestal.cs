@@ -14,6 +14,7 @@ public class ItemPedestal : DungeonEntity
 
     public void Start()
     {
+        origPosition = transform.localPosition;
         loadedBefore = false;
     }
 

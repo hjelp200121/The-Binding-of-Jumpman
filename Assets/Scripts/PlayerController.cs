@@ -534,7 +534,7 @@ public class PlayerController : DungeonEntity, IExplodable
         invincible = true;
         tempSpeed = 30;
         lawnPower = true;
-        shieldTime = 3;
+        shieldTime = 2;
         tempAcceleration = 1000;
     }
 }
