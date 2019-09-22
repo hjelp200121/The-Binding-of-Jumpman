@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ActiveBomb : DungeonEntity
 {
+    public ExplosionEffect explosionEffectPrefab;
     public float explosionDamage;
     public float explosionRadius;
     public float explosionForce;
@@ -34,6 +35,9 @@ public class ActiveBomb : DungeonEntity
     {
         Explosion.Explode(this, explosionDamage, explosionForce,
                           transform.position, explosionRadius);
+        ExplosionEffect exp = Instantiate<ExplosionEffect>(explosionEffectPrefab);
+        exp.transform.position = transform.position;
+        exp.transform.localScale *= explosionRadius / exp.radius;
     }
 
     public override void Load()

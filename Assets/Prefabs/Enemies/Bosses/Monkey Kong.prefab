@@ -124,6 +124,8 @@ MonoBehaviour:
   health: 0
   player: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  explosionEffectPrefab: {fileID: 5553043259702239244, guid: ebaca906e2924fe458127da259aaafbd,
+    type: 3}
   walkSpeed: 2
   runForce: 30000
   specialAttackCooldown: 3

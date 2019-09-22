@@ -136,6 +136,8 @@ MonoBehaviour:
   room: {fileID: 0}
   rb: {fileID: 0}
   flying: 0
+  explosionEffectPrefab: {fileID: 5553043259702239244, guid: ebaca906e2924fe458127da259aaafbd,
+    type: 3}
   explosionDamage: 10
   explosionRadius: 3
   explosionForce: 10

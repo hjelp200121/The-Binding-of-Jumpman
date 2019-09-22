@@ -242,6 +242,10 @@ public class PlayerController : DungeonEntity, IExplodable
 
     public void Shoot()
     {
+        if (currentRoom == null)
+        {
+            return;
+        }
         Projectile projectile = Instantiate<Projectile>(projectilePrefab, transform.position, transform.rotation);
 
         Vector2 projectileVel = lookDirection.ToVector() * shotSpeed;
@@ -271,6 +275,10 @@ public class PlayerController : DungeonEntity, IExplodable
 
     public void PlaceBomb()
     {
+        if (currentRoom == null)
+        {
+            return;
+        }
         ActiveBomb bomb = Instantiate<ActiveBomb>(bombPrefab);
         bomb.explosionDamage = bombDamage;
         bomb.explosionForce = bombForce;

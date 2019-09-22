@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2900605179197894710}
   m_Layer: 0
   m_Name: Item Pools
-  m_TagString: Untagged
+  m_TagString: Item Pool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +45,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPools:
   - items:
+    - {fileID: 6061345323556524600, guid: fc50624790014f845882bdcec03c348c, type: 3}
+    - {fileID: 813931446272610599, guid: e63bb36f7d37cf8439f44d97a36ad993, type: 3}
+    - {fileID: 4948650844382495045, guid: 95fdcb96b7bc92f49be38e8b1f7ebc28, type: 3}
+    - {fileID: 8570584365730878610, guid: 10de7257b05f8e9849ef6074f158347a, type: 3}
     - {fileID: 3811012216790246077, guid: 3885c99b6624563f29c979698d05337a, type: 3}
+    - {fileID: 7187374574784663990, guid: 66db67ad1f27e414083f53e861c8fbe2, type: 3}
   - items:
+    - {fileID: 2308223376818099700, guid: fa00b15efef2dc446a7b8ac658ca744a, type: 3}
     - {fileID: 1612040458337376333, guid: c84bedfb41c050b1dae646dc74d2f52b, type: 3}
+    - {fileID: 154764950438934410, guid: 3d8e2dc4fd0df6f43b1d554663020a38, type: 3}
+    - {fileID: 8989735617009954552, guid: ff8238e19dcbbe74b870fd764ff054ee, type: 3}
+    - {fileID: 2796157020408027732, guid: 6eb4f0535e2464c4785ae8525748bcc3, type: 3}
+    - {fileID: 7046611944614265955, guid: 13bf494b18d236149a0c90a62727ad23, type: 3}
+    - {fileID: 5473026420847022901, guid: 80a60d3f604b51a4da9555b391499e0a, type: 3}

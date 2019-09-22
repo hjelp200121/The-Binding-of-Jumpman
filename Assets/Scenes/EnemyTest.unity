@@ -306,6 +306,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dungeon: {fileID: 348688144}
+  branchingInfo:
+  - minLength: 1
+    maxLength: 1
+    goal: 2
+  - minLength: 1
+    maxLength: 1
+    goal: 3
   roomPrefabs:
   - rooms:
     - {fileID: 8525502820696896646, guid: 397031848f2772a1aa071c2c4890df16, type: 3}
@@ -320,7 +327,6 @@ MonoBehaviour:
   - {fileID: 8678755084259120714, guid: bb5fb79e84d22ea7b84fbd25058deaea, type: 3}
   - {fileID: 6004600028432738531, guid: c443b138f57d60c20a8b11ff00803921, type: 3}
   - {fileID: 5114638550573253100, guid: 2a97a11d591d0faa6bb10108e857c30e, type: 3}
-  branchLength: 2
 --- !u!4 &140820791
 Transform:
   m_ObjectHideFlags: 0

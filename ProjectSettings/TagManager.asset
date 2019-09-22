@@ -12,6 +12,7 @@ TagManager:
   - Rock
   - Active Bomb
   - Boss
+  - Item Pool
   layers:
   - Default
   - TransparentFX

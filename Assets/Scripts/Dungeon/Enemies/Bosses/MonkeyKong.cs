@@ -10,6 +10,8 @@ public class MonkeyKong : Boss
     {
         WALKING, SLAMMING, RUNNING, DAZED
     }
+
+    public ExplosionEffect explosionEffectPrefab;
     public float walkSpeed;
     public float runForce;
     public float specialAttackCooldown;
@@ -104,6 +106,10 @@ public class MonkeyKong : Boss
             slamForce, transform.position,
             slamRadius);
 
+        ExplosionEffect exp = Instantiate<ExplosionEffect>(explosionEffectPrefab);
+        exp.transform.position = transform.position;
+        exp.transform.localScale *= slamRadius / exp.radius;
+
         lastSpecialAttack = Time.time;
         rb.velocity = Vector2.zero;
 
@@ -136,10 +142,15 @@ public class MonkeyKong : Boss
             if (other.tag == "Room Wall")
             {
                 lastSpecialAttack = Time.time;
-                rb.velocity = Vector2.zero;
                 Explosion.Explode(this, 20f,
                     collsionForceModifier * rb.velocity.magnitude, transform.position,
                     collsionRadiusModifier * rb.velocity.magnitude);
+
+                ExplosionEffect exp = Instantiate<ExplosionEffect>(explosionEffectPrefab);
+                exp.transform.position = transform.position;
+                exp.transform.localScale *= collsionRadiusModifier * rb.velocity.magnitude / exp.radius;
+
+                rb.velocity = Vector2.zero;
 
                 dazedTime = collisionDazedDuration;
                 action = MonkeyKongActions.DAZED;
