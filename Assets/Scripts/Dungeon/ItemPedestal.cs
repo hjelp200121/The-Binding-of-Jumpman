@@ -41,7 +41,11 @@ public class ItemPedestal : DungeonEntity
             if (ItemPools.instance != null)
             {
                 pool = ItemPools.instance.itemPools[(int)poolNames];
-                item = Instantiate<Item>(pool.GetRandomItem(), itemParent);
+                Item itemPrefab = pool.GetRandomItem();
+                if (itemPrefab != null)
+                {
+                    item = Instantiate<Item>(itemPrefab, itemParent);
+                }
             }
         }
         if (room.cleared)

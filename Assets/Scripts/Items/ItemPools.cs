@@ -34,6 +34,10 @@ public class ItemPool : System.Object
 
     public Item GetRandomItem()
     {
+        if (items.Count == 0)
+        {
+            return null;
+        }
         int index = UnityEngine.Random.Range(0, items.Count);
         Item item = items[index];
         items.RemoveAt(index);

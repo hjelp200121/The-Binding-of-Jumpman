@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -132,7 +135,8 @@ public class PlayerController : DungeonEntity, IExplodable
             Shoot();
         }
 
-        if (!lawnPower) {
+        if (!lawnPower)
+        {
             tempAcceleration = acceleration;
             tempSpeed = speed;
         }
@@ -149,11 +153,28 @@ public class PlayerController : DungeonEntity, IExplodable
 
     public void Die(DungeonObject source)
     {
-        Debug.Log("Player was killed by " + source.name + ".");
+        Application.Quit();
+#if UNITY_EDITOR
+        if(EditorApplication.isPlaying) 
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
+#endif
     }
 
     public void HandleInput()
     {
+        if (Input.GetKeyDown("escape"))
+        {
+            Debug.Log("Quit tid");
+            Application.Quit();
+#if UNITY_EDITOR
+            if(EditorApplication.isPlaying) 
+            {
+                UnityEditor.EditorApplication.isPlaying = false;
+            }
+#endif
+        }
         /* Default look direction. */
         lookDirection = Directions.SOUTH;
 
@@ -263,7 +284,7 @@ public class PlayerController : DungeonEntity, IExplodable
             {
                 rb.velocity += velocityChange;
             }
-        }   
+        }
     }
 
     public void Shoot()
@@ -279,28 +300,42 @@ public class PlayerController : DungeonEntity, IExplodable
             {
                 projectileUsed = Knifeprefab;
 
-            } else {
+            }
+            else
+            {
                 projectileUsed = projectilePrefab;
             }
         }
-        if (hasThorn) {
-            if (shottype > 20 && shottype < 50) {
+        if (hasThorn)
+        {
+            if (shottype > 20 && shottype < 50)
+            {
                 projectileUsed = Thornprefab;
-            } else if (shottype > 50) {
+            }
+            else if (shottype > 50)
+            {
                 projectileUsed = projectilePrefab;
             }
         }
-        if (hasBensGrill) {
-            if (shottype > 50 && shottype < 60) {
+        if (hasBensGrill)
+        {
+            if (shottype > 50 && shottype < 60)
+            {
                 projectileUsed = Coalprefab;
-            } else if (shottype > 60 && shottype < 70) {
+            }
+            else if (shottype > 60 && shottype < 70)
+            {
                 projectileUsed = BBQprefab;
-            } else if (shottype > 70) {
+            }
+            else if (shottype > 70)
+            {
                 projectileUsed = projectilePrefab;
             }
         }
-        if (hasFireFlower) {
-            if (projectileUsed == projectilePrefab) {
+        if (hasFireFlower)
+        {
+            if (projectileUsed == projectilePrefab)
+            {
                 projectileUsed = Fireprefab;
             }
         }
@@ -316,20 +351,28 @@ public class PlayerController : DungeonEntity, IExplodable
         if (hasFasPolicy)
         {
             projectile.damage = temporaryDamage;
-        } else
+        }
+        else
         {
             projectile.damage = damage;
         }
 
-        if (projectileUsed == Knifeprefab) {
+        if (projectileUsed == Knifeprefab)
+        {
             projectile.damage += damage * 2;
-        } else if (projectileUsed == Thornprefab) {
+        }
+        else if (projectileUsed == Thornprefab)
+        {
             projectile.damage += damage / 2;
             projectile.timer += shotTimer / 2;
-        } else if (projectileUsed == Coalprefab) {
+        }
+        else if (projectileUsed == Coalprefab)
+        {
             projectile.timer -= shotTimer / 2;
             projectile.rb.velocity *= 0.8f;
-        } else if (projectileUsed == BBQprefab) {
+        }
+        else if (projectileUsed == BBQprefab)
+        {
             projectile.damage *= 7;
             projectile.timer += shotTimer / 2;
             projectile.rb.velocity *= 1.25f;
@@ -374,8 +417,8 @@ public class PlayerController : DungeonEntity, IExplodable
             {
                 int newMax = (int)Mathf.Ceil(maxHealth / 2f);
                 Debug.Log(newMax);
-                Debug.Log(hpImages.Count-1);
-                for (int i = hpImages.Count-1; newMax <= i; i--)
+                Debug.Log(hpImages.Count - 1);
+                for (int i = hpImages.Count - 1; newMax <= i; i--)
                 {
                     Debug.Log("i: " + i);
                     Destroy(hpImages[i].gameObject);
@@ -464,7 +507,7 @@ public class PlayerController : DungeonEntity, IExplodable
         if (heartLocketActive)
         {
             heartLocketActive = false;
-            invincibilityTime += invincibilityOnDamage*2;
+            invincibilityTime += invincibilityOnDamage * 2;
             return;
         }
         if ((health -= amount) <= 0)
