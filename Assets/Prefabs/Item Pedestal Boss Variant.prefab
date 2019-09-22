@@ -92,5 +92,10 @@ PrefabInstance:
       propertyPath: poolNames
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6621851260211060273, guid: 5ace1526bbc069234b9d266eb92a6de7,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ace1526bbc069234b9d266eb92a6de7, type: 3}
