@@ -379,7 +379,7 @@ public class PlayerController : DungeonEntity, IExplodable
         }
     }
 
-    public void OnRoomClear()
+    public override void OnRoomBeaten()
     {
         if (activeItem is DiscreteActiveItem)
         {

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2367512662182949477}
   - component: {fileID: 2367512662182949467}
   - component: {fileID: 6885904427766250909}
+  - component: {fileID: -441598871119228666}
   m_Layer: 13
   m_Name: Key Pickup
   m_TagString: Pickup
@@ -107,7 +108,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -131,3 +132,24 @@ PolygonCollider2D:
       - {x: 0.023829937, y: -0.021288991}
       - {x: 0.11123419, y: 0.14799058}
       - {x: 0.052418232, y: 0.22812355}
+--- !u!50 &-441598871119228666
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2367512662182949479}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.2
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

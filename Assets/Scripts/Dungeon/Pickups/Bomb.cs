@@ -14,6 +14,7 @@ public class Bomb : Pickup
     public override void OnPickup (PlayerController pickerUpper) {
         pickerUpper.bombCount++;
         pickerUpper.UpdateUI();
+        room.contents.objectRemoveQueue.Enqueue(this);
         Destroy(gameObject);
     }
 }

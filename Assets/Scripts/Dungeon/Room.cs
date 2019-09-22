@@ -14,6 +14,8 @@ public class Room : MonoBehaviour
     /* Four bits representing whether or not a door is allowed in that direction. */
     public int doorMask = 0;
     public RoomTypes type;
+    public float rewardChance;
+    public DungeonEntity[] rewards;
 
     public SpriteRenderer[] wallDecorationsRenderers;
     /* The four colliders to use when no door is at the wall. */
@@ -25,12 +27,14 @@ public class Room : MonoBehaviour
     public PlayerController player;
     public bool cleared;
     public bool discovered;
+    public bool beaten;
 
 
     void Awake()
     {
-        cleared = true;
+        cleared = false;
         discovered = false;
+        beaten = true;
         if (contents.room == null)
         {
             contents = new RoomContents(this, gridWidth, gridHeight);
@@ -72,6 +76,7 @@ public class Room : MonoBehaviour
     {
         if (contents.enemyCount > 0)
         {
+            beaten = false;
             cleared = false;
             foreach (Door door in doors)
             {
@@ -86,8 +91,13 @@ public class Room : MonoBehaviour
             if (!cleared)
             {
                 OnClear();
+                cleared = true;
             }
-            cleared = true;
+            if (!beaten)
+            {
+                OnBeaten();
+                beaten = true;
+            }
             foreach (Door door in doors)
             {
                 if (door != null)
@@ -97,12 +107,66 @@ public class Room : MonoBehaviour
             }
 
         }
-        Debug.Log(gameObject.name + " cleared updated: " + cleared);
+    }
+
+    void OnBeaten()
+    {
+        player.OnRoomBeaten();
+        foreach (DungeonObject dungeonObject in contents.objects)
+        {
+            dungeonObject.OnRoomBeaten();
+        }
+        foreach (DungeonTile dungeonTile in contents.tiles)
+        {
+            if (dungeonTile != null)
+            {
+                dungeonTile.OnRoomBeaten();
+            }
+        }
+
+        if (Random.Range(0f, 1f) <= rewardChance)
+        {
+            int x, y;
+            x = gridWidth / 2;
+            y = gridHeight / 2;
+
+            while (contents.GetTile(x, y) != null) {
+                Directions rand = (Directions)Random.Range(0, 5);
+                if ((x += (int)rand.ToVector().x) >= gridWidth || x < 0)
+                {
+                    x -= (int)rand.ToVector().x;
+                }
+                if ((y += (int)rand.ToVector().y) >= gridHeight || y < 0)
+                {
+                    y -= (int)rand.ToVector().y;
+                }
+            }
+
+            DungeonEntity rewardPrefab = rewards[Random.Range(0, rewards.Length)];
+            DungeonEntity reward = Instantiate<DungeonEntity>(rewardPrefab, transform);
+            Vector2 pos = new Vector2(x - gridWidth / 2, y - gridHeight / 2);
+            reward.transform.position = transform.TransformPoint(pos);
+
+            reward.room = this;
+
+            contents.objectAddQueue.Enqueue(reward);
+        }
     }
 
     void OnClear()
     {
         player.OnRoomClear();
+        foreach (DungeonObject dungeonObject in contents.objects)
+        {
+            dungeonObject.OnRoomClear();
+        }
+        foreach (DungeonTile dungeonTile in contents.tiles)
+        {
+            if (dungeonTile != null)
+            {
+                dungeonTile.OnRoomClear();
+            }
+        }
     }
 }
 

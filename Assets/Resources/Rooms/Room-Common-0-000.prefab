@@ -135,6 +135,10 @@ MonoBehaviour:
   y: 0
   doorMask: 15
   type: 0
+  rewardChance: 1
+  rewards:
+  - {fileID: 2367512662182949467, guid: 5e819b0806959922bb6cc3f68288a780, type: 3}
+  - {fileID: 7734581431166992452, guid: 7e0db22bb00e71cfd98811f88f78d65d, type: 3}
   wallDecorationsRenderers:
   - {fileID: 9104599913509686607}
   - {fileID: 3589712289687678615}
@@ -249,6 +253,7 @@ MonoBehaviour:
   player: {fileID: 0}
   cleared: 0
   discovered: 0
+  beaten: 0
 --- !u!1 &5039056160082619102
 GameObject:
   m_ObjectHideFlags: 0

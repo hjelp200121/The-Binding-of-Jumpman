@@ -14,6 +14,7 @@ public class Key : Pickup
     public override void OnPickup (PlayerController pickerUpper) {
         pickerUpper.keyCount++;
         pickerUpper.UpdateUI();
+        room.contents.objectRemoveQueue.Enqueue(this);
         Destroy(gameObject);
     }
 }
