@@ -10,13 +10,13 @@ public class AnnoyingDog : DiscreteActiveItem
         {
             foreach (DungeonObject dungeonObject in player.currentRoom.contents.objects)
             {
-                ItemPedestal ItemPedestal = dungeonObject as ItemPedestal;
-                if (ItemPedestal != null)
+                ItemPedestal itemPedestal = dungeonObject as ItemPedestal;
+                if (itemPedestal != null && itemPedestal.item != null)
                 {
-                    Destroy(ItemPedestal.item.gameObject);
+                    Destroy(itemPedestal.item.gameObject);
                     if(Random.Range(0,101) > 99)
                     {
-                        ItemPedestal.item = Instantiate<Item>(ItemPedestal.pool.GetRandomItem(), ItemPedestal.itemParent);
+                        itemPedestal.item = Instantiate<Item>(itemPedestal.pool.GetRandomItem(), itemPedestal.itemParent);
                     } 
                     player.keyCount += Random.Range(-2, 3);
                     player.bombCount += Random.Range(-2, 3);

@@ -10,11 +10,11 @@ public class ZeroItem : DiscreteActiveItem
         {
             foreach (DungeonObject dungeonObject in player.currentRoom.contents.objects)
             {
-                ItemPedestal ItemPedestal = dungeonObject as ItemPedestal;
-                if (ItemPedestal != null)
+                ItemPedestal itemPedestal = dungeonObject as ItemPedestal;
+                if (itemPedestal != null && itemPedestal.item != null)
                 {
-                    Destroy(ItemPedestal.item.gameObject);
-                    ItemPedestal.item = Instantiate<Item>(ItemPedestal.pool.GetRandomItem(), ItemPedestal.itemParent);
+                    Destroy(itemPedestal.item.gameObject);
+                    itemPedestal.item = Instantiate<Item>(itemPedestal.pool.GetRandomItem(), itemPedestal.itemParent);
                 }
             }
             return true;

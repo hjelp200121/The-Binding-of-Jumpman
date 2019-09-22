@@ -65,7 +65,9 @@ public class PlayerController : DungeonEntity, IExplodable
     public Projectile Knifeprefab;
     public bool hasThorn = false;
     public Projectile Thornprefab;
-    public bool activateLawnmower = false;
+    public bool lawnPower = false;
+    public float tempSpeed;
+    public float tempAcceleration;
 
     // Initializations for different stuff
     SpriteRenderer spriteRenderer;
@@ -84,6 +86,8 @@ public class PlayerController : DungeonEntity, IExplodable
         blinkRoutine = Blink(0.2f);
         items = new List<Item>();
         projectileUsed = projectilePrefab;
+        tempSpeed = speed;
+        tempAcceleration = acceleration;
 
         healthPanel = GameObject.Find("Health Panel").GetComponent<RectTransform>();
         keyText = GameObject.Find("Keys Text").GetComponent<Text>();
@@ -123,10 +127,18 @@ public class PlayerController : DungeonEntity, IExplodable
             Shoot();
         }
 
+        if (!lawnPower) {
+            tempAcceleration = acceleration;
+            tempSpeed = speed;
+        }
+
         shieldTime -= Time.deltaTime;
-        if (shieldTime == 0)
+        if (shieldTime < 0.1 && shieldTime > -0.1)
         {
             invincible = false;
+            lawnPower = false;
+            tempSpeed = speed;
+            tempAcceleration = acceleration;
         }
     }
 
@@ -240,9 +252,9 @@ public class PlayerController : DungeonEntity, IExplodable
         {
             /* No resin allowed */
             velocityChange = velocityChange.normalized;
-            velocityChange *= acceleration * Time.deltaTime;
+            velocityChange *= tempAcceleration * Time.deltaTime;
             /* Only apply speed if not already going too fast. */
-            if ((rb.velocity + velocityChange).sqrMagnitude < speed * speed)
+            if ((rb.velocity + velocityChange).sqrMagnitude < tempSpeed * tempSpeed)
             {
                 rb.velocity += velocityChange;
             }
@@ -335,22 +347,24 @@ public class PlayerController : DungeonEntity, IExplodable
             hpImages.RemoveAt(0);
             if (hpImages.Count > Mathf.Ceil(maxHealth / 2f))
             {
-                int tooMany = hpImages.Count - (int)Mathf.Ceil(maxHealth / 2f);
-                for (int i = 0; i < tooMany; i++)
+                int newMax = (int)Mathf.Ceil(maxHealth / 2f);
+                Debug.Log(newMax);
+                Debug.Log(hpImages.Count-1);
+                for (int i = hpImages.Count-1; newMax <= i; i--)
                 {
-                    int j = hpImages.Count - i - 1;
-                    hpImages.RemoveAt(j);
-                    Destroy(hpImages[j].gameObject);
+                    Debug.Log("i: " + i);
+                    Destroy(hpImages[i].gameObject);
+                    hpImages.RemoveAt(i);
                 }
             }
             else if (hpImages.Count < Mathf.Ceil(maxHealth / 2f))
             {
-                int tooFew = (int)Mathf.Ceil(maxHealth / 2f) - hpImages.Count;
-                for (int i = 0; i < tooFew; i++)
+                int newMax = (int)Mathf.Ceil(maxHealth / 2f);
+                for (int i = hpImages.Count; i < newMax; i++)
                 {
                     Image hpImage = Instantiate<Image>(healthImagePrefab, healthPanel);
                     hpImage.rectTransform.Translate(
-                        Vector2.right * (hpImages.Count + i) * hpImage.rectTransform.rect.width / 2);
+                        Vector2.right * i * hpImage.rectTransform.rect.width);
                     hpImages.Add(hpImage);
                 }
             }
@@ -515,4 +529,12 @@ public class PlayerController : DungeonEntity, IExplodable
         }
     }
 
+    public void ActivateLawnmower()
+    {
+        invincible = true;
+        tempSpeed = 30;
+        lawnPower = true;
+        shieldTime = 3;
+        tempAcceleration = 1000;
+    }
 }

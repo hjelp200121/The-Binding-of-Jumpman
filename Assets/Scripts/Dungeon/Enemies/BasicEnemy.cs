@@ -17,8 +17,12 @@ public class BasicEnemy : Enemy
     public void OnCollisionEnter2D(Collision2D collision) {
         Collider2D other = collision.collider;
         if (other.tag == "Player") {
-            PlayerController player = other.GetComponent<PlayerController>();
-            player.TakeDamage(this);
+            if (player.lawnPower) {
+                health -= 10;
+            } else {
+                PlayerController player = other.GetComponent<PlayerController>();
+                player.TakeDamage(this);
+            }
         }
     }
 }
