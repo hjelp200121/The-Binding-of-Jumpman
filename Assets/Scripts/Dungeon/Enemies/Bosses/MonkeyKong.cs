@@ -121,7 +121,7 @@ public class MonkeyKong : Boss
         lastSpecialAttack = Time.time;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionStay2D(Collision2D collision)
     {
         Collider2D other = collision.collider;
         if (action == MonkeyKongActions.RUNNING)
