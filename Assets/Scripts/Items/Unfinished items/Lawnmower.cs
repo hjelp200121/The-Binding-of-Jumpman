@@ -9,7 +9,7 @@ public class Lawnmower : DiscreteActiveItem
 
         if (base.Use(player))
         {
-            player.activateLawnmower;
+            player.ActivateLawnmower();
             return true;
         }
         else

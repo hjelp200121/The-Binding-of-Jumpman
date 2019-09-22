@@ -65,7 +65,9 @@ public class PlayerController : DungeonEntity, IExplodable
     public Projectile Knifeprefab;
     public bool hasThorn = false;
     public Projectile Thornprefab;
-    public bool activateLawnmower = false;
+    public bool lawnPower = false;
+    public float tempSpeed;
+    public float tempAcceleration;
 
     // Initializations for different stuff
     SpriteRenderer spriteRenderer;
@@ -84,6 +86,8 @@ public class PlayerController : DungeonEntity, IExplodable
         blinkRoutine = Blink(0.2f);
         items = new List<Item>();
         projectileUsed = projectilePrefab;
+        tempSpeed = speed;
+        tempAcceleration = acceleration;
 
         healthPanel = GameObject.Find("Health Panel").GetComponent<RectTransform>();
         keyText = GameObject.Find("Keys Text").GetComponent<Text>();
@@ -120,10 +124,18 @@ public class PlayerController : DungeonEntity, IExplodable
             Shoot();
         }
 
+        if (!lawnPower) {
+            tempAcceleration = acceleration;
+            tempSpeed = speed;
+        }
+
         shieldTime -= Time.deltaTime;
-        if (shieldTime == 0)
+        if (shieldTime < 0.1 && shieldTime > -0.1)
         {
             invincible = false;
+            lawnPower = false;
+            tempSpeed = speed;
+            tempAcceleration = acceleration;
         }
     }
 
@@ -237,9 +249,9 @@ public class PlayerController : DungeonEntity, IExplodable
         {
             /* No resin allowed */
             velocityChange = velocityChange.normalized;
-            velocityChange *= acceleration * Time.deltaTime;
+            velocityChange *= tempAcceleration * Time.deltaTime;
             /* Only apply speed if not already going too fast. */
-            if ((rb.velocity + velocityChange).sqrMagnitude < speed * speed)
+            if ((rb.velocity + velocityChange).sqrMagnitude < tempSpeed * tempSpeed)
             {
                 rb.velocity += velocityChange;
             }
@@ -504,4 +516,12 @@ public class PlayerController : DungeonEntity, IExplodable
         }
     }
 
+    public void ActivateLawnmower()
+    {
+        invincible = true;
+        tempSpeed = 30;
+        lawnPower = true;
+        shieldTime = 3;
+        tempAcceleration = 1000;
+    }
 }
