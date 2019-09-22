@@ -235,16 +235,12 @@ public class PlayerController : DungeonEntity, IExplodable
             {
                 activeItemImage.gameObject.SetActive(true);
 
-                activeItemImage.sprite = Resources.Load<Sprite>(activeItem.SpritePath);
-                if (activeItemImage.sprite == null)
-                {
-                    Debug.LogError("No sprite at '" + activeItem.SpritePath + "'.");
-                }
+                activeItemImage.sprite = activeItem.GetComponent<SpriteRenderer>().sprite;
                 if (activeItem is DiscreteActiveItem)
                 {
                     DiscreteActiveItem dActiveItem = activeItem as DiscreteActiveItem;
                     activeItemChargeBar.gameObject.SetActive(true);
-                    activeItemChargeBar.maxValue = dActiveItem.MaxCharge;
+                    activeItemChargeBar.maxValue = dActiveItem.maxCharge;
                     activeItemChargeBar.wholeNumbers = true;
                     activeItemChargeBar.value = dActiveItem.Charge;
                 }
@@ -366,12 +362,21 @@ public class PlayerController : DungeonEntity, IExplodable
         {
             pedestal.item = activeItem;
             activeItem = item as ActiveItem;
+            if (pedestal.item != null)
+            {
+                pedestal.item.transform.SetParent(pedestal.itemParent, false);
+                pedestal.item.GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
         else
         {
             items.Add(item);
             pedestal.item = null;
         }
+        item.transform.SetParent(transform, false);
+        item.transform.position = transform.position;
+        item.transform.localScale = Vector3.one;
+        item.GetComponent<SpriteRenderer>().enabled = false;
         UpdateUI();
     }
 
