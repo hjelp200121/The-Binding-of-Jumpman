@@ -111,12 +111,12 @@ MonoBehaviour:
   maxHealth: 6
   health: 0
   damage: 3.5
-  fireDelay: 0.2
+  fireDelay: 0.5
   shotTimer: 1
   shotSpeed: 5
   accuracy: 0.1
   speed: 5
-  acceleration: 20
+  acceleration: 10
   bombPrefab: {fileID: 4489267182006379514, guid: fe451b137cb6a1c10af9a1f10f91eebd,
     type: 3}
   bombDamage: 15

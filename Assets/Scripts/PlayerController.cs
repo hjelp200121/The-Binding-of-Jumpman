@@ -164,7 +164,7 @@ public class PlayerController : DungeonEntity, IExplodable
             {
                 rb.velocity = rb.velocity.normalized * speed;
             }
-        }
+        }   
     }
 
     public void UpdateUI()
