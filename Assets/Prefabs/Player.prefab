@@ -117,6 +117,7 @@ MonoBehaviour:
   accuracy: 0.1
   speed: 5
   acceleration: 20
+  friction: 2
   bombPrefab: {fileID: 4489267182006379514, guid: fe451b137cb6a1c10af9a1f10f91eebd,
     type: 3}
   bombDamage: 15
@@ -131,6 +132,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8fafb1719fc847740a32f09aae9256f3, type: 3}
   - {fileID: 21300000, guid: 44056f475755184439132e25b29d5dd1, type: 3}
   currentRoom: {fileID: 0}
+  activeItem: {fileID: 0}
+  items: []
   invincibilityTime: 0
   invincible: 0
 --- !u!50 &3984815402720974282

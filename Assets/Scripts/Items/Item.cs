@@ -1,13 +1,13 @@
 ﻿using System;
+using UnityEngine;
 
-[System.Serializable]
-public abstract class Item
+[RequireComponent(typeof(SpriteRenderer))]
+public abstract class Item : MonoBehaviour
 {
     public static bool taken = false;
+    public string itemName;
+    public string description;
     public abstract bool IsActive { get; }
-    public abstract string Name { get; }
-    public abstract string Description { get; }
-    public abstract string SpritePath { get; }
 
     public virtual void OnPickup(ItemPedestal pedestal, PlayerController player)
     {
@@ -32,12 +32,12 @@ public abstract class ActiveItem : Item
 [System.Serializable]
 public abstract class DiscreteActiveItem : ActiveItem
 {
-    public abstract int MaxCharge { get; }
+    public int maxCharge;
     public int Charge { get; private set; }
 
     public override bool Use(PlayerController player)
     {
-        if (Charge == MaxCharge)
+        if (Charge == maxCharge)
         {
             Charge = 0;
             return true;
@@ -60,9 +60,9 @@ public abstract class DiscreteActiveItem : ActiveItem
 
     public void ChargeItem(int amount)
     {
-        if ((Charge += amount) > MaxCharge)
+        if ((Charge += amount) > maxCharge)
         {
-            Charge = MaxCharge;
+            Charge = maxCharge;
         }
     }
 }
