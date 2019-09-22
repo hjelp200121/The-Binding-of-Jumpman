@@ -94,6 +94,7 @@ public class PlayerController : DungeonEntity, IExplodable
         UpdateUI();
 
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(healthPanel.transform.root);
     }
 
     // Update is called once per frame

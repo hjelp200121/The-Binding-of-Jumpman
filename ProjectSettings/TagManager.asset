@@ -13,6 +13,7 @@ TagManager:
   - Active Bomb
   - Boss
   - Item Pool
+  - Player UI
   layers:
   - Default
   - TransparentFX

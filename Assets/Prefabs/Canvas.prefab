@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7743787773133991366}
   m_Layer: 5
   m_Name: Fill
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 7743787773165957309}
   m_Layer: 5
   m_Name: Active Item Panel
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 7743787773445554290}
   m_Layer: 5
   m_Name: Keys Text
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 7743787773602547623}
   m_Layer: 5
   m_Name: Fill Area
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 7743787773784736485}
   m_Layer: 5
   m_Name: Bomb Image
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 7743787774192056765}
   m_Layer: 5
   m_Name: Bombs Panel
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 7743787774203248114}
   m_Layer: 5
   m_Name: Bombs Text
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -498,7 +498,7 @@ GameObject:
   - component: {fileID: 7743787774413420022}
   m_Layer: 5
   m_Name: Active Item Charge Bar
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -587,7 +587,7 @@ GameObject:
   - component: {fileID: 7743787774550121220}
   m_Layer: 5
   m_Name: Key Image
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -660,7 +660,7 @@ GameObject:
   - component: {fileID: 7743787774550784899}
   m_Layer: 5
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -733,7 +733,7 @@ GameObject:
   - component: {fileID: 7743787774551059694}
   m_Layer: 5
   m_Name: Health Panel
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -806,7 +806,7 @@ GameObject:
   - component: {fileID: 7743787774694912531}
   m_Layer: 5
   m_Name: Active Item Image
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -879,7 +879,7 @@ GameObject:
   - component: {fileID: 7743787774861588646}
   m_Layer: 5
   m_Name: Keys Panel
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1055,7 +1055,7 @@ GameObject:
   - component: {fileID: 7743787775054348258}
   m_Layer: 5
   m_Name: Pickups Panel
-  m_TagString: Untagged
+  m_TagString: Player UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
