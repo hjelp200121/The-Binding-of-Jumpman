@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: 841d453670d84004085760a42ef6724a
+guid: 2158d58683ee2d98abe76fcf8b70309a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6015273610943186741
-    second: BossMonkeyKongWalkingAnimation_0
+      213: -3065374877348555842
+    second: BossMonkeyKongSlammingAnimation.png_0
   - first:
-      213: -2111851122767270944
-    second: BossMonkeyKongWalkingAnimation_1
+      213: 4794109975678371606
+    second: BossMonkeyKongSlammingAnimation.png_1
+  - first:
+      213: -4885218467747963924
+    second: BossMonkeyKongSlammingAnimation.png_2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -92,13 +95,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BossMonkeyKongWalkingAnimation_0
+      name: BossMonkeyKongSlammingAnimation.png_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 0
-        width: 43
-        height: 47
+        width: 45
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -106,19 +109,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67a9619bbd0008648a33eef3259fb2df
-      internalID: -6015273610943186741
+      spriteID: cd8bd9849fe1d5fc2b8e03dfc098bb4b
+      internalID: -3065374877348555842
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BossMonkeyKongWalkingAnimation_1
+      name: BossMonkeyKongSlammingAnimation.png_1
       rect:
         serializedVersion: 2
-        x: 50
+        x: 48
         y: 0
-        width: 43
+        width: 45
         height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -127,8 +130,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba903e0f4b94326bbab5a18f31cc95a5
-      internalID: -2111851122767270944
+      spriteID: f1c95411812e8c63b89e7cc467afc542
+      internalID: 4794109975678371606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMonkeyKongSlammingAnimation.png_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68f34c91486cd6863b5f19b1d733dd8d
+      internalID: -4885218467747963924
       vertices: []
       indices: 
       edges: []

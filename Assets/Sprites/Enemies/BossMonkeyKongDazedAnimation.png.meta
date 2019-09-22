@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: 841d453670d84004085760a42ef6724a
+guid: 13be96b0c664d5c92baa1283002c5e34
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6015273610943186741
-    second: BossMonkeyKongWalkingAnimation_0
+      213: 2606667818545851330
+    second: BossMonkeyKongDazedAnimation_0
   - first:
-      213: -2111851122767270944
-    second: BossMonkeyKongWalkingAnimation_1
+      213: 8636197255909166360
+    second: BossMonkeyKongDazedAnimation_1
+  - first:
+      213: -4857810638903499856
+    second: BossMonkeyKongDazedAnimation_2
+  - first:
+      213: 1841922616937875225
+    second: BossMonkeyKongDazedAnimation_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -92,13 +98,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BossMonkeyKongWalkingAnimation_0
+      name: BossMonkeyKongDazedAnimation_0
       rect:
         serializedVersion: 2
         x: 2
         y: 0
         width: 43
-        height: 47
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -106,17 +112,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67a9619bbd0008648a33eef3259fb2df
-      internalID: -6015273610943186741
+      spriteID: 72bd68acda0c55bd8ac5a3b4adbe3cc5
+      internalID: 2606667818545851330
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BossMonkeyKongWalkingAnimation_1
+      name: BossMonkeyKongDazedAnimation_1
       rect:
         serializedVersion: 2
-        x: 50
+        x: 48
         y: 0
         width: 43
         height: 47
@@ -127,8 +133,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba903e0f4b94326bbab5a18f31cc95a5
-      internalID: -2111851122767270944
+      spriteID: 68c5060af80b545d399630c42f6cddf0
+      internalID: 8636197255909166360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMonkeyKongDazedAnimation_2
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 0
+        width: 43
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ef2bfdab1332c551878ad20e3b31d3e
+      internalID: -4857810638903499856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMonkeyKongDazedAnimation_3
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 43
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 094912794873f33dda64d0509f58f6f6
+      internalID: 1841922616937875225
       vertices: []
       indices: 
       edges: []

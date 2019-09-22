@@ -11,6 +11,9 @@ public class Explosion : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(explosionPosition, explosionRadius);
         foreach (Collider2D hit in hits)
         {
+            if (hit.gameObject == source.gameObject) {
+                continue;
+            }
 
             /* Get all MonoBehaviour components of the hit. */
             var scripts = hit.GetComponents<MonoBehaviour>();

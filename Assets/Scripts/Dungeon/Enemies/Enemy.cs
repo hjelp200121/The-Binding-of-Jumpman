@@ -9,11 +9,13 @@ public abstract class Enemy : DungeonEntity, IExplodable
     public float health;
     public PlayerController player;
     bool alive;
+    public SpriteRenderer spriteRenderer;
 
     public override void Awake()
     {
         health = baseHealth;
         alive = true;
+        spriteRenderer = GetComponent<SpriteRenderer>();
         base.Awake();
     }
 

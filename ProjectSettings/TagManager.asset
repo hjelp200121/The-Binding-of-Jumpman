@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Rock
   - Active Bomb
+  - Boss
   layers:
   - Default
   - TransparentFX
