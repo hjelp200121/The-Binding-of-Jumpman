@@ -1,0 +1,128 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public class Room : MonoBehaviour
+{
+    public static int gridHeight = 7;
+    public static int gridWidth = 13;
+
+    public float width, height;
+    public float wallThickness = 1f;
+    public int x, y;
+    /* Four bits representing whether or not a door is allowed in that direction. */
+    public int doorMask = 0;
+    public RoomTypes type;
+
+    public SpriteRenderer[] wallDecorationsRenderers;
+    /* The four colliders to use when no door is at the wall. */
+    public Collider2D[] doorwayColliders;
+    public Door[] doors;
+
+    public RoomContents contents;
+
+    public PlayerController player;
+    public bool cleared;
+    public bool discovered;
+
+
+    void Awake()
+    {
+        cleared = true;
+        discovered = false;
+        if (contents.room == null)
+        {
+            contents = new RoomContents(this, gridWidth, gridHeight);
+        }
+    }
+
+    public void Load(PlayerController player)
+    {
+        /* Apply random decorations. */
+        if (!discovered && wallDecorationsRenderers.Length > 0)
+        {
+            foreach (SpriteRenderer wallDec in wallDecorationsRenderers)
+            {
+                wallDec.flipX = Random.Range(0, 2) == 1;
+                wallDec.flipY = Random.Range(0, 2) == 1;
+            }
+        }
+
+        gameObject.SetActive(true);
+        this.player = player;
+        player.currentRoom = this;
+        contents.Load();
+        UpdateCleared();
+        discovered = true;
+    }
+
+    public void UnLoad()
+    {
+        contents.UnLoad();
+        if (player != null)
+        {
+            player.currentRoom = null;
+        }
+        this.player = null;
+        gameObject.SetActive(false);
+    }
+
+    public void UpdateCleared()
+    {
+        if (contents.enemyCount > 0)
+        {
+            cleared = false;
+            foreach (Door door in doors)
+            {
+                if (door != null)
+                {
+                    door.Close();
+                }
+            }
+        }
+        else
+        {
+            if (!cleared)
+            {
+                OnClear();
+            }
+            cleared = true;
+            foreach (Door door in doors)
+            {
+                if (door != null)
+                {
+                    door.Open();
+                }
+            }
+
+        }
+        Debug.Log(gameObject.name + " cleared updated: " + cleared);
+    }
+
+    void OnClear()
+    {
+        player.OnRoomClear();
+    }
+}
+
+/* A collection of rooms. Used by the dungeon generator. */
+[System.Serializable]
+public class RoomCollection
+{
+    public List<Room> rooms;
+}
+
+public enum RoomTypes
+{
+    START, COMMON, TREASURE, BOSS
+}
+
+static class RoomTypesExtentionMethods
+{
+    public static bool IsSpecial(this RoomTypes type)
+    {
+        return type == RoomTypes.TREASURE ||
+               type == RoomTypes.BOSS;
+    }
+}

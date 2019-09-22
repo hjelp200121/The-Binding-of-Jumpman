@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Room Floor
+  - Room Wall
+  - Room
+  - Pickup
+  - Enemy
+  - Rock
   layers:
   - Default
   - TransparentFX
@@ -13,14 +19,14 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Room
+  - Enemy
+  - Flying Enemy
+  - Player
+  - Ground
+  - Pickup
+  - Projectile
+  - Pedestal
   - 
   - 
   - 
@@ -38,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Room
+    uniqueID: 4139428165
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
