@@ -68,6 +68,11 @@ public class PlayerController : DungeonEntity, IExplodable
     public bool lawnPower = false;
     public float tempSpeed;
     public float tempAcceleration;
+    public bool hasBensGrill = false;
+    public Projectile Coalprefab;
+    public Projectile BBQprefab;
+    public bool hasFireFlower = false;
+    public Projectile Fireprefab;
 
     // Initializations for different stuff
     SpriteRenderer spriteRenderer;
@@ -285,6 +290,20 @@ public class PlayerController : DungeonEntity, IExplodable
                 projectileUsed = projectilePrefab;
             }
         }
+        if (hasBensGrill) {
+            if (shottype > 50 && shottype < 60) {
+                projectileUsed = Coalprefab;
+            } else if (shottype > 60 && shottype < 70) {
+                projectileUsed = BBQprefab;
+            } else if (shottype > 70) {
+                projectileUsed = projectilePrefab;
+            }
+        }
+        if (hasFireFlower) {
+            if (projectileUsed == projectilePrefab) {
+                projectileUsed = Fireprefab;
+            }
+        }
         Projectile projectile = Instantiate<Projectile>(projectileUsed, transform.position, transform.rotation);
 
         Vector2 projectileVel = lookDirection.ToVector() * shotSpeed;
@@ -304,10 +323,16 @@ public class PlayerController : DungeonEntity, IExplodable
 
         if (projectileUsed == Knifeprefab) {
             projectile.damage += damage * 2;
-        } else if (projectileUsed == Thornprefab)
-        {
+        } else if (projectileUsed == Thornprefab) {
             projectile.damage += damage / 2;
             projectile.timer += shotTimer / 2;
+        } else if (projectileUsed == Coalprefab) {
+            projectile.timer -= shotTimer / 2;
+            projectile.rb.velocity *= 0.8f;
+        } else if (projectileUsed == BBQprefab) {
+            projectile.damage *= 7;
+            projectile.timer += shotTimer / 2;
+            projectile.rb.velocity *= 1.25f;
         }
 
         projectile.fromPlayer = true;

@@ -467,7 +467,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemPools.Array.data[0].items.Array.data[0]
       value: 
-      objectReference: {fileID: 1880235178746088147, guid: 26f92e0e999c369459a78f08a389031a,
+      objectReference: {fileID: 929964827763702208, guid: 86c28c0dd1b8184488b9cc15534e2c3d,
         type: 3}
     - target: {fileID: 2900605179197894710, guid: 3ff913f69f5ad8e4fb2549dea0504bc1,
         type: 3}
