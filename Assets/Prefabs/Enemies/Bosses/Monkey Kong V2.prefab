@@ -25,7 +25,7 @@ PrefabInstance:
     - target: {fileID: 3783776783186976457, guid: 2fb0b5493a6ea0afa8b87047b1c8b016,
         type: 3}
       propertyPath: slamForce
-      value: 1000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3783776783186976457, guid: 2fb0b5493a6ea0afa8b87047b1c8b016,
         type: 3}
@@ -45,12 +45,12 @@ PrefabInstance:
     - target: {fileID: 3783776783186976457, guid: 2fb0b5493a6ea0afa8b87047b1c8b016,
         type: 3}
       propertyPath: collsionForceModifier
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3783776783186976457, guid: 2fb0b5493a6ea0afa8b87047b1c8b016,
         type: 3}
       propertyPath: collsionRadiusModifier
-      value: 1.2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3783776783186976457, guid: 2fb0b5493a6ea0afa8b87047b1c8b016,
         type: 3}

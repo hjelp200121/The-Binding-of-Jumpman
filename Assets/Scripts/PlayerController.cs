@@ -130,6 +130,7 @@ public class PlayerController : DungeonEntity, IExplodable
         HandleInput();
         UpdateDirection();
         Move();
+        ClampPosition();
 
         if (shooting && Time.time > lastFire + fireDelay)
         {
@@ -286,6 +287,30 @@ public class PlayerController : DungeonEntity, IExplodable
             {
                 rb.velocity += velocityChange;
             }
+        }
+    }
+
+    public void ClampPosition()
+    {
+        if (currentRoom != null)
+        {
+            Vector2 newPos = transform.position;
+            if (newPos.x < currentRoom.transform.position.x - (Room.gridWidth + 1) / 2f ||
+                newPos.x > currentRoom.transform.position.x + (Room.gridWidth + 1) / 2f)
+            {
+                newPos.x = Mathf.Clamp(newPos.x,
+                            currentRoom.transform.position.x - (Room.gridWidth - 1) / 2f,
+                            currentRoom.transform.position.x + (Room.gridWidth - 1) / 2f);
+            }
+            if (newPos.y < currentRoom.transform.position.y - (Room.gridHeight + 1) / 2f ||
+                newPos.y > currentRoom.transform.position.y + (Room.gridHeight + 1) / 2f)
+            {
+                newPos.y = Mathf.Clamp(newPos.y,
+                            currentRoom.transform.position.y - (Room.gridHeight - 1) / 2f,
+                            currentRoom.transform.position.y + (Room.gridHeight - 1) / 2f);
+            }
+
+            transform.position = newPos;
         }
     }
 
@@ -545,7 +570,8 @@ public class PlayerController : DungeonEntity, IExplodable
 
     public override void OnRoomBeaten()
     {
-        if(hasHeartLocket) {
+        if (hasHeartLocket)
+        {
             heartLocketActive = true;
         }
         temporaryDamage = damage;
