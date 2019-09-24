@@ -10,5 +10,6 @@ public class LegendaryHero : PassiveItem
         player.maxHealth += 2;
         player.health += 2;
         player.damage *= 1.25f;
+        player.UpdateUI();
     }
 }
