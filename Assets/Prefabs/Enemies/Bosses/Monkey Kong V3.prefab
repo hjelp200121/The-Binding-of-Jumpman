@@ -72,6 +72,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7004518762802332898, guid: 4f9bc2d21a1bfdc40868de75965693a4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e2205d6813d1f514e9ad03e09509a6c6,
+        type: 3}
     - target: {fileID: 7004518762802332900, guid: 4f9bc2d21a1bfdc40868de75965693a4,
         type: 3}
       propertyPath: baseHealth
