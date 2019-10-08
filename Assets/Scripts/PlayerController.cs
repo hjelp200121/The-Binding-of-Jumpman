@@ -412,7 +412,7 @@ public class PlayerController : DungeonEntity, IExplodable
         currentRoom.contents.objectAddQueue.Enqueue(projectile);
         if (hasFasPolicy)
         {
-            temporaryDamage *= 1.01f;
+            temporaryDamage *= 1.03f;
         }
     }
 
