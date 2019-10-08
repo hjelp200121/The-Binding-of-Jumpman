@@ -9,10 +9,10 @@ public class ItemPedestal : DungeonEntity
     public ItemPool pool;
     public Item item;
 
-    private bool loadedBefore;
+    public bool loadedBefore;
     Vector2 origPosition;
 
-    public void Start()
+    public void Awake()
     {
         origPosition = transform.localPosition;
         loadedBefore = false;
