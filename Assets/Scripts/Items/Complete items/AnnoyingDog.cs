@@ -14,7 +14,7 @@ public class AnnoyingDog : DiscreteActiveItem
                 if (itemPedestal != null && itemPedestal.item != null)
                 {
                     Destroy(itemPedestal.item.gameObject);
-                    if(Random.Range(0,101) > 99)
+                    if(Random.Range(0,101) > 66)
                     {
                         itemPedestal.item = Instantiate<Item>(itemPedestal.pool.GetRandomItem(), itemPedestal.itemParent);
                     } 
