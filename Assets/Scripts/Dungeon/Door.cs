@@ -65,8 +65,8 @@ public class Door : MonoBehaviour, IExplodable
             PlayerController player = other.GetComponent<PlayerController>();
             /* Move the player to the entrance of the other door. */
             player.transform.Translate(direction.ToVector() * 2f);
-            room.UnLoad();
-            connection.room.Load(player);
+            room.Leave(player);
+            connection.room.Enter(player);
             Camera.main.GetComponent<CameraController>().target = connection.room.transform;
 
             broken = false;

@@ -574,7 +574,6 @@ public class PlayerController : DungeonEntity, IExplodable
         {
             heartLocketActive = true;
         }
-        temporaryDamage = damage;
         if (activeItem is DiscreteActiveItem)
         {
             (activeItem as DiscreteActiveItem).ChargeItem();
@@ -615,6 +614,11 @@ public class PlayerController : DungeonEntity, IExplodable
     public override void Load() { }
     public override void UnLoad() { }
 
+    public override void OnRoomEnter(Room room)
+    {
+        temporaryDamage = damage;
+        base.OnRoomEnter(room);
+    }
     public IEnumerator ShowItemInfo()
     {
         Debug.Log("------sa");
