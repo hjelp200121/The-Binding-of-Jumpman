@@ -10,12 +10,15 @@ public class ItemPedestal : DungeonEntity
     public Item item;
 
     public bool loadedBefore;
+    public bool hasSpawnedItem;
     Vector2 origPosition;
 
-    public void Awake()
+    public override void Awake()
     {
+        base.Awake();
         origPosition = transform.localPosition;
         loadedBefore = false;
+        hasSpawnedItem = false;
     }
 
     void Update()
@@ -38,14 +41,15 @@ public class ItemPedestal : DungeonEntity
             loadedBefore = true;
             origPosition = transform.localPosition;
 
-            if (ItemPools.instance != null)
+        }
+        if (!hasSpawnedItem && ItemPools.instance != null)
+        {
+            pool = ItemPools.instance.itemPools[(int)poolNames];
+            Item itemPrefab = pool.GetRandomItem();
+            if (itemPrefab != null)
             {
-                pool = ItemPools.instance.itemPools[(int)poolNames];
-                Item itemPrefab = pool.GetRandomItem();
-                if (itemPrefab != null)
-                {
-                    item = Instantiate<Item>(itemPrefab, itemParent);
-                }
+                hasSpawnedItem = true;
+                item = Item.InstantiateItem(itemPrefab, itemParent);
             }
         }
         if (room.cleared)

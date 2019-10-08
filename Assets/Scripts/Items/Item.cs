@@ -1,18 +1,40 @@
 ﻿using System;
 using UnityEngine;
 
+public class ItemMetaData
+{
+    public bool seen = false;
+    public bool pickedUp = false;
+}
+
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class Item : MonoBehaviour
 {
-    public static bool taken = false;
     public string itemName;
     public string description;
+    public ItemMetaData metaData = null;
     public abstract bool IsActive { get; }
+
+    public virtual void Start () {
+        metaData.seen = true;
+    }
 
     public virtual void OnPickup(ItemPedestal pedestal, PlayerController player)
     {
-        taken = true;
+        metaData.pickedUp = true;
         player.PickUpItem(pedestal, this);
+    }
+
+    public static Item InstantiateItem(Item prefab) {
+        Item item = Instantiate<Item>(prefab);
+        item.metaData = prefab.metaData;
+        return item;
+    }
+
+    public static Item InstantiateItem(Item prefab, Transform parent) {
+        Item item = Instantiate<Item>(prefab, parent);
+        item.metaData = prefab.metaData;
+        return item;
     }
 }
 
@@ -67,8 +89,9 @@ public abstract class DiscreteActiveItem : ActiveItem
         }
     }
 
-    public void Awake()
+    public override void Start()
     {
+        base.Start();
         this.Charge = maxCharge;
     }
 }

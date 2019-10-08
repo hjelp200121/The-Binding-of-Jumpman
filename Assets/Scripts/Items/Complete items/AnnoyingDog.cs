@@ -14,10 +14,14 @@ public class AnnoyingDog : DiscreteActiveItem
                 if (itemPedestal != null && itemPedestal.item != null)
                 {
                     Destroy(itemPedestal.item.gameObject);
-                    if(Random.Range(0,101) > 66)
+                    if (Random.Range(0, 101) > 66)
                     {
-                        itemPedestal.item = Instantiate<Item>(itemPedestal.pool.GetRandomItem(), itemPedestal.itemParent);
-                    } 
+                        Item itemPrefab = itemPedestal.pool.GetRandomItem();
+                        if (itemPrefab != null)
+                        {
+                            itemPedestal.item = Item.InstantiateItem(itemPrefab, itemPedestal.itemParent);
+                        }
+                    }
                     player.keyCount += Random.Range(-2, 3);
                     player.bombCount += Random.Range(-2, 3);
 

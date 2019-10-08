@@ -13,8 +13,12 @@ public class ZeroItem : DiscreteActiveItem
                 ItemPedestal itemPedestal = dungeonObject as ItemPedestal;
                 if (itemPedestal != null && itemPedestal.item != null)
                 {
-                    Destroy(itemPedestal.item.gameObject);
-                    itemPedestal.item = Instantiate<Item>(itemPedestal.pool.GetRandomItem(), itemPedestal.itemParent);
+                    Item itemPrefab = itemPedestal.pool.GetRandomItem();
+                    if (itemPrefab != null)
+                    {
+                        Destroy(itemPedestal.item.gameObject);
+                        itemPedestal.item = Item.InstantiateItem(itemPrefab, itemPedestal.itemParent);
+                    }
                 }
             }
             return true;

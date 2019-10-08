@@ -11,11 +11,12 @@ public enum ItemPoolNames
 public class ItemPools : MonoBehaviour
 {
     public static ItemPools instance = null;
+    public Dictionary<Type, ItemMetaData> itemMetaData;
 
     [NamedArray(typeof(ItemPoolNames))]
     public ItemPool[] itemPools;
 
-    void Awake ()
+    void Awake()
     {
         if (instance != null)
         {
@@ -24,6 +25,21 @@ public class ItemPools : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        itemMetaData = new Dictionary<Type, ItemMetaData>();
+        foreach (ItemPool pool in itemPools)
+        {
+            foreach (Item item in pool.items)
+            {
+                Type key = item.GetType();
+                if (!itemMetaData.ContainsKey(key))
+                {
+                    ItemMetaData metaData = new ItemMetaData();
+                    itemMetaData.Add(key, metaData);
+                }
+                item.metaData = itemMetaData[key];
+            }
+        }
     }
 }
 
@@ -38,9 +54,13 @@ public class ItemPool : System.Object
         {
             return null;
         }
-        int index = UnityEngine.Random.Range(0, items.Count);
-        Item item = items[index];
-        items.RemoveAt(index);
+        List<Item> eligebelItems = items.FindAll(
+            i => !ItemPools.instance.itemMetaData[i.GetType()].seen);
+        if (eligebelItems.Count == 0) {
+            return null;
+        }
+        int index = UnityEngine.Random.Range(0, eligebelItems.Count);
+        Item item = eligebelItems[index];
         return item;
     }
 }
