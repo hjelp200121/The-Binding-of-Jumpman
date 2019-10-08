@@ -108,6 +108,17 @@ public class Room : MonoBehaviour
 
         }
     }
+    public void Enter(PlayerController player)
+    {
+        Load(player);
+        player.OnRoomEnter(this);
+    }
+
+    public void Leave(PlayerController player)
+    {
+        player.OnRoomLeave(this);
+        UnLoad();
+    }
 
     void OnBeaten()
     {

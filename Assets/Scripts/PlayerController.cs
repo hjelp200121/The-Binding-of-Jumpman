@@ -570,11 +570,6 @@ public class PlayerController : DungeonEntity, IExplodable
 
     public override void OnRoomBeaten()
     {
-        if (hasHeartLocket)
-        {
-            heartLocketActive = true;
-        }
-        temporaryDamage = damage;
         if (activeItem is DiscreteActiveItem)
         {
             (activeItem as DiscreteActiveItem).ChargeItem();
@@ -615,6 +610,15 @@ public class PlayerController : DungeonEntity, IExplodable
     public override void Load() { }
     public override void UnLoad() { }
 
+    public override void OnRoomEnter(Room room)
+    {
+        if (hasHeartLocket)
+        {
+            heartLocketActive = true;
+        }
+        temporaryDamage = damage;
+        base.OnRoomEnter(room);
+    }
     public IEnumerator ShowItemInfo()
     {
         Debug.Log("------sa");

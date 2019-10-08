@@ -13,4 +13,13 @@ public abstract class DungeonEntity : DungeonObject
     {
         this.rb = GetComponent<Rigidbody2D>();
     }
+
+    public virtual void OnRoomEnter(Room room)
+    {
+        return;
+    }
+    public virtual void OnRoomLeave(Room room)
+    {
+        return;
+    }
 }
