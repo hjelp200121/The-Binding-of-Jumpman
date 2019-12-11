@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dungeon
       objectReference: {fileID: 0}
+    - target: {fileID: 8269794563472888987, guid: e0fe0c06519eabaf3b06a603449bc8a2,
+        type: 3}
+      propertyPath: floor
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8269794563472888988, guid: e0fe0c06519eabaf3b06a603449bc8a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -187,11 +192,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8269794563472888987, guid: e0fe0c06519eabaf3b06a603449bc8a2,
-        type: 3}
-      propertyPath: floor
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0fe0c06519eabaf3b06a603449bc8a2, type: 3}
 --- !u!114 &504273899 stripped
@@ -218,41 +218,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
-        type: 3}
-      propertyPath: healthPanel
-      value: 
-      objectReference: {fileID: 1115464484}
-    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
-        type: 3}
-      propertyPath: keyText
-      value: 
-      objectReference: {fileID: 1115464483}
-    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
-        type: 3}
-      propertyPath: bombText
-      value: 
-      objectReference: {fileID: 1115464482}
-    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
-        type: 3}
-      propertyPath: activeItemImage
-      value: 
-      objectReference: {fileID: 1115464481}
-    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
-        type: 3}
-      propertyPath: activeItemChargeBar
-      value: 
-      objectReference: {fileID: 1115464480}
-    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
-        type: 3}
-      propertyPath: itemNameText
-      value: 
-      objectReference: {fileID: 1115464479}
-    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
-        type: 3}
-      propertyPath: itemDescriptionText
-      value: 
-      objectReference: {fileID: 1115464478}
     - target: {fileID: 3984815402720974283, guid: ffcda85ada29ec63b8543bbd558de7a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -306,6 +271,49 @@ PrefabInstance:
     - target: {fileID: 3984815402720974283, guid: ffcda85ada29ec63b8543bbd558de7a1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
+        type: 3}
+      propertyPath: healthPanel
+      value: 
+      objectReference: {fileID: 1115464484}
+    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
+        type: 3}
+      propertyPath: keyText
+      value: 
+      objectReference: {fileID: 1115464483}
+    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
+        type: 3}
+      propertyPath: bombText
+      value: 
+      objectReference: {fileID: 1115464482}
+    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
+        type: 3}
+      propertyPath: activeItemImage
+      value: 
+      objectReference: {fileID: 1115464481}
+    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
+        type: 3}
+      propertyPath: activeItemChargeBar
+      value: 
+      objectReference: {fileID: 1115464480}
+    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
+        type: 3}
+      propertyPath: itemNameText
+      value: 
+      objectReference: {fileID: 1115464479}
+    - target: {fileID: 3984815402720974286, guid: ffcda85ada29ec63b8543bbd558de7a1,
+        type: 3}
+      propertyPath: itemDescriptionText
+      value: 
+      objectReference: {fileID: 1115464478}
+    - target: {fileID: 404593287, guid: ffcda85ada29ec63b8543bbd558de7a1, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 404593287, guid: ffcda85ada29ec63b8543bbd558de7a1, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -534,6 +534,7 @@ public class PlayerController : DungeonEntity, IExplodable
         if (heartLocketActive)
         {
             heartLocketActive = false;
+            animator.SetBool("Shield",false);
             invincibilityTime += invincibilityOnDamage * 2;
             return;
         }
@@ -615,6 +616,7 @@ public class PlayerController : DungeonEntity, IExplodable
         if (hasHeartLocket)
         {
             heartLocketActive = true;
+            animator.SetBool("Shield", true);
         }
         temporaryDamage = damage;
         base.OnRoomEnter(room);
